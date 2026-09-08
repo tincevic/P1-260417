@@ -61,7 +61,7 @@ function draw() {
   text("4.",340,10);
   // kleur om doorzichtigheid te laten zien
   noStroke();
-  fill(151,64,57);
+  fill(151,64,57,1);
   rect(380,85,170,200);
     // echt het huisje tekenen
   strokeWeight(2);
@@ -127,7 +127,7 @@ function draw() {
   circle(650,75,20);
   circle(675,100,20);
 
-  // tekening 7: mario pixel art
+  // tekening 7: mario
   noStroke();
   fill(0);
   text("7.",600,210);
