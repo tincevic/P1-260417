@@ -1,3 +1,5 @@
+// pas op: spaghetticode
+
 let ffont; // tekening 1
 let act; // tekening 5
 let start; // tekening 5
@@ -5,14 +7,14 @@ let licht; // tekening 5
 let sfont; // tekening 9
 let cfont; // tekening 9
 let tfont; // tekening 9
-let xS = 975; // sierpinski. willekeurig punt; startpunt
-let yS = 510;
-let ax = 975; // hoek 0
-let ay = 510;
-let bx = 850; // hoek 1
-let by = 710;
-let cx = 1100; // hoek 2
-let cy = 710;
+let xS; // sierpinski. willekeurig punt; startpunt
+let yS;
+let ax = 1275; // hoek 0
+let ay = 15;
+let bx = 1150; // hoek 1
+let by = 215;
+let cx = 1400; // hoek 2
+let cy = 215;
 
 
 function setup() {
@@ -26,6 +28,22 @@ function setup() {
   noStroke();
   fill(151,64,57,random(200));
   rect(350,85,220,200);
+  fill(0);
+  textFont("Bahnschrift");
+  textSize(12);
+  text("2.",20,20);
+  text("3.",20,415);
+  text("4.",340,10);
+  text("5.",340,415);
+  text("6.",600,10);
+  text("7.",600,210);
+  text("8. Sonic",600,420);
+  text("9. TAFKAP (Prince) - Gold",800,8);
+  text("10. Logo",850,300);
+  text("11. Favoriete plek (Eiland Šipan, Kroatië)",850,500)
+  text("12. Driehoek van Sierpinski",1150,10);
+  let xS = floor(random(1150, 1400));
+  let yS = floor(random(15, 215));
   let act = floor((random(2)));
   if (act == 0) {
     licht = "rood";
@@ -54,18 +72,13 @@ function setup() {
 
 function draw() {
   // tekening 1: naam
-  noStroke();
   fill(0);
   textFont(ffont);
   textSize(15);
   text("Tin Martincevic",20,10); // hoi!
   textFont("Bahnschrift");
-  textSize(12);
-
   // tekening 2: vlag (Joegoslavië)
   noStroke();
-  fill(0);
-  text("2.",20,20);
   fill(0,56,147);
   rect(25,25,300,100);
   fill(255);
@@ -78,9 +91,6 @@ function draw() {
   star(175,180,30.3,80,5); // wordt later gedefiniëerd. ik gebruik een custom functie
 
   // tekening 3: schaakbord.
-  noStroke();
-  fill(0);
-  text("3.",20,415);
   stroke(0);
   strokeWeight(3);
   fill(255);
@@ -109,9 +119,6 @@ function draw() {
   rect(275,675,50,50);
 
   // tekening 4: huis
-  noStroke();
-  fill(0);
-  text("4.",340,10);
   strokeWeight(2);
   stroke(0);
   // huis
@@ -128,8 +135,6 @@ function draw() {
 
   // tekening 5: stoplicht (WERKEND!)
   noStroke();
-  fill(0);
-  text("5.",340,415);
   let el = millis() - start; // elapsed
   if (licht == "groen" && el >= 5000) {
     licht = "oranje";
@@ -139,7 +144,7 @@ function draw() {
     licht = "rood";
     start = millis(); // reset
   }
-  else if (licht == "rood" && el >= 5000) {
+  else if (licht == "rood" && el >= 10000) {
     licht = "groen";
     start = millis(); // reset
   }
@@ -183,8 +188,6 @@ function draw() {
 
   // tekening 6: dobbelsteen
   noStroke();
-  fill(0);
-  text("6.",600,10);
   fill(127);
   square(610,20,100,20);
   strokeWeight(3);
@@ -199,15 +202,11 @@ function draw() {
 
   // tekening 7: Mario
   noStroke();
-  fill(0);
-  text("7.",600,210);
 
   mario(); // in andere functie geplaatst want anders wordt dit bijna onleesbaar
 
   // tekening 8: gamefiguur
   noStroke();
-  fill(0);
-  text("8. Sonic",600,420);
 
   sonic(); // in andere functie geplaatst want anders wordt dit bijna onleesbaar
 
@@ -215,41 +214,41 @@ function draw() {
 
   album(); // in andere functie geplaatst want anders wordt dit bijna onleesbaar
 
-  noStroke();
-  fill(0);
-  text("9. TAFKAP (Prince) - Gold",800,8);
-  noStroke();
   fill(50,20,20,200);
   textFont(sfont);
   textSize(150);
-  text("j",900,190); // hoi!
-  fill(153,115,48);
+  text("j",900,190); // symbool - O(+>
+  textFont(cfont);
+  textSize(55);
+  text("gold",820,70);
+  textFont(tfont);
+  textSize(13);
+  text("rock'n'roll is alive",940,220);
+  text("(and it lives in minneapolis)",910,234);
+
+  fill(203,165,48);
+  textFont(sfont);
+  textSize(150);
   text("j",897,187);
   textFont(cfont);
   textSize(55);
-  fill(50,20,20,200);
-  text("gold",820,70);
-  fill(153,115,48);
   text("gold",817,67);
+
   fill(116,47,42);
   textSize(10);
   text("b/w",940,210);
+
+  fill(242);
   textFont(tfont);
   textSize(13);
-  fill(50,20,20,200);
-  text("rock'n'roll is alive",940,220);
-  text("(and it lives in minneapolis)",910,234);
-  fill(242);
   text("rock'n'roll is alive",938,218);
-  text("(and it lives in minneapolis)",908,232);
+  text("(and it lives in minneapolis)",907,232);
+
   noStroke();
   fill(0);
   textSize(12);
-  textFont("Bahnschrift");
 
   // tekening 10: logo
-
-  text("10. Logo",850,300);
   fill(0);
   rect(850,340,20,120);
   rect(870,370,25,20);
@@ -262,13 +261,18 @@ function draw() {
   triangle(980,370,980,380,970,370);
   star(885,415,5.5,10,5); // wordt later gedefiniëerd. ik gebruik een custom functie
 
-  // tekening ??: driehoek van Sierpinski
+  // tekening 11: favoriete plek
+  
+  sipan(); // in andere functie geplaatst want anders wordt dit bijna onleesbaar
+  fill(0);
+  star(1055,675,3,8,5)
+
+  // tekening 12: driehoek van Sierpinski
 
   noStroke();
   fill(0);
   textSize(12);
   textFont("Bahnschrift");
-  text("??. Driehoek van Sierpinski",850,500);
   // boven getekend in setup functie, anders zou het elke frame een nieuwe tekenen
 
     // heb het zo efficiënt mogelijk proberen te maken door kleuren te sorteren
@@ -1007,5 +1011,100 @@ function album() {
   rect(825,110,5,5);
   rect(890,110,5,5);
   
+  pop();
+}
+
+function sipan() {
+
+  push();
+
+  translate(850, 520);
+  scale(0.24);
+  translate(-2, -2);
+
+  stroke(0);
+  strokeWeight(3);
+
+  line(2, 5, 50, 20);
+  line(50, 20, 53, 2);
+  line(53, 2, 135, 40);
+  line(135, 40, 155, 23);
+  line(155, 23, 173, 20);
+  line(173, 20, 212, 52);
+  line(212, 52, 230, 53);
+  line(230, 53, 213, 18);
+  line(213, 18, 242, 21);
+  line(242, 21, 316, 52);
+  line(316, 52, 345, 87);
+  line(345, 87, 377, 115);
+  line(377, 115, 376, 155);
+  line(376, 155, 398, 152);
+  line(398, 152, 398, 175);
+  line(398, 175, 423, 181);
+  line(423, 181, 490, 218);
+  line(490, 218, 528, 244);
+  line(528, 244, 531, 255);
+  line(531, 255, 550, 244);
+  line(550, 244, 593, 273);
+  line(593, 273, 644, 299);
+  line(644, 299, 652, 296);
+  line(652, 296, 667, 309);
+  line(667, 309, 676, 332);
+  line(676, 332, 714, 342);
+  line(714, 342, 726, 337);
+  line(726, 337, 737, 346);
+  line(737, 346, 738, 376);
+  line(738, 376, 782, 390);
+  line(782, 390, 812, 417);
+  line(812, 417, 825, 435);
+  line(825, 435, 838, 465);
+  line(838, 465, 891, 491);
+  line(891, 491, 892, 519);
+  line(892, 519, 930, 526);
+  line(930, 526, 968, 590);
+  line(968, 590, 960, 628);
+  line(960, 628, 906, 646);
+  line(906, 646, 868, 660);
+  line(868, 660, 883, 686);
+  line(883, 686, 911, 699);
+  line(911, 699, 943, 724);
+  line(943, 724, 915, 725);
+  line(915, 725, 897, 749);
+  line(897, 749, 872, 741);
+  line(872, 741, 848, 771);
+  line(848, 771, 843, 804);
+  line(843, 804, 861, 833);
+  line(861, 833, 798, 806);
+  line(798, 806, 726, 766);
+  line(726, 766, 737, 743);
+  line(737, 743, 688, 715);
+  line(688, 715, 638, 670);
+  line(638, 670, 593, 611);
+  line(593, 611, 532, 593);
+  line(532, 593, 497, 549);
+  line(497, 549, 476, 553);
+  line(476, 553, 410, 535);
+  line(410, 535, 367, 514);
+  line(367, 514, 343, 474);
+  line(343, 474, 283, 436);
+  line(283, 436, 258, 402);
+  line(258, 402, 226, 395);
+  line(226, 395, 137, 332);
+  line(137, 332, 144, 315);
+  line(144, 315, 200, 339);
+  line(200, 339, 269, 397);
+  line(269, 397, 294, 395);
+  line(294, 395, 356, 427);
+  line(356, 427, 366, 406);
+  line(366, 406, 307, 356);
+  line(307, 356, 285, 313);
+  line(285, 313, 247, 298);
+  line(247, 298, 210, 232);
+  line(210, 232, 189, 207);
+  line(189, 207, 176, 158);
+  line(176, 158, 148, 138);
+  line(148, 138, 127, 113);
+  line(127, 113, 113, 113);
+  line(113, 113, 2, 5);
   pop();
 }
