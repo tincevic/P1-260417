@@ -7,18 +7,18 @@ let licht; // tekening 5
 let sfont; // tekening 9
 let cfont; // tekening 9
 let tfont; // tekening 9
-let xS; // sierpinski. willekeurig punt; startpunt
+let xS; // sierpinski. willekeurig punt wordt in setup gedefinieerd; startpunt
 let yS;
 let ax = 1275; // hoek 0
 let ay = 15;
 let bx = 1150; // hoek 1
-let by = 215;
+let by = 245;
 let cx = 1400; // hoek 2
-let cy = 215;
+let cy = 245;
 
 
 function setup() {
-  createCanvas(1500,1500);
+  createCanvas(1900,800);
   background(225);
   ffont = loadFont("/../Assets/Bulga.otf"); 
   sfont = loadFont("/../Assets/Prince.otf");
@@ -42,8 +42,23 @@ function setup() {
   text("10. Logo",850,300);
   text("11. Favoriete plek (Eiland Šipan, Kroatië)",850,500)
   text("12. Driehoek van Sierpinski",1150,10);
-  let xS = floor(random(1150, 1400));
-  let yS = floor(random(15, 215));
+  text("13. Droomhuis (layout) - eerste verdieping",1150,300)
+  text("14. Scène uit boek (Ark van Noach) \n     Genesis, hoofdstukken 6-9",1550,10);
+  text("Tweede verdieping",1150,550);
+  textStyle(ITALIC);
+  text("Woonkamer/eetkamer",1200,360);
+  text("Schuur/\nmeter\nkast",1407,350);
+  text("Hal",1190,440);
+  text("wc",1340,415);
+  text("Gang",1270,600);
+  text("Bad-\nkamer",1155,635);
+  text("Slaapkamer",1155,585);
+  text("Gast-\nkamer",1295,635);
+  yS = random(ay,by);
+  let ht = (yS - ay) / (by - ay);
+  let left = ax + (bx - ax) * ht;
+  let right = ax + (cx - ax) * ht;
+  xS = random(left,right);
   let act = floor((random(2)));
   if (act == 0) {
     licht = "rood";
@@ -265,6 +280,7 @@ function draw() {
   
   sipan(); // in andere functie geplaatst want anders wordt dit bijna onleesbaar
   fill(0);
+  circle(943,617,8);
   star(1055,675,3,8,5)
 
   // tekening 12: driehoek van Sierpinski
@@ -275,6 +291,115 @@ function draw() {
   textFont("Bahnschrift");
   // boven getekend in setup functie, anders zou het elke frame een nieuwe tekenen
 
+  // tekening 13: droomhuis - layout
+
+  // eerste verdieping 
+  // muren
+  stroke(0);
+  strokeWeight(3);
+  fill(0,0,0,0);
+  line(1150,310,1350,310);
+  line(1350,310,1350,385);
+  line(1350,385,1375,385);
+  line(1375,385,1375,435);
+  line(1375,435,1325,435);
+  line(1325,435,1325,410);
+  line(1325,410,1350,385);
+  line(1325,410,1150,410);
+  line(1150,410,1150,310);
+  rect(1170,410,60,70);
+  square(1400,330,60);
+  
+  // ramen
+  stroke(255);
+  line(1350,320,1350,340);
+  line(1150,330,1150,350);
+  line(1150,370,1150,390);
+  line(1185,310,1310,310);
+  line(1250,410,1300,410);
+  line(1375,400,1375,420);
+  line(1420,330,1440,330);
+  line(1420,390,1440,390);
+
+  // deuren
+  stroke(0);
+  strokeWeight(1);
+  line(1400,345,1350,345); // pad
+  line(1400,365,1350,365);
+  stroke(120,120,120,10);
+  arc(1190,410,50,50,PI+HALF_PI,TWO_PI,PIE);
+  arc(1190,480,50,50,PI+HALF_PI,TWO_PI,PIE);
+  arc(1345,390,50,50,PI-QUARTER_PI,PI+QUARTER_PI,PIE);
+  arc(1350,340,50,50,0,HALF_PI,PIE);
+  arc(1400,370,50,50,PI,PI+HALF_PI,PIE);
+
+  // trap
+  stroke(0);
+  arc(1310,345,50,50,PI,TWO_PI,PIE);
+  line(1310,345,1290,330);
+  line(1310,345,1330,330);
+  line(1310,345,1310,320);
+  line(1310,345,1298,322.5);
+  line(1310,345,1322,322.5);
+  line(1310,345,1287.5,340);
+  line(1310,345,1332.5,340);
+
+  // tweede verdieping
+  // muren
+  stroke(0);
+  strokeWeight(3);
+  fill(0,0,0,0);
+  line(1150,560,1350,560);
+  line(1350,560,1350,635);
+  line(1325,660,1350,635);
+  line(1325,660,1150,660);
+  line(1150,660,1150,560);
+  line(1150,620,1240,620);
+  line(1200,620,1200,660);
+  line(1240,620,1240,560);
+  line(1285,660,1285,620);
+  line(1285,620,1350,620);
+
+  // ramen
+  stroke(255);
+  line(1350,570,1350,590);
+  line(1150,580,1150,600);
+  //line(1150,620,1150,640);
+  line(1185,560,1310,560);
+  line(1230,660,1280,660);
+  line(1330,655,1345,640);
+
+  // trap
+  stroke(0);
+  strokeWeight(1);
+  arc(1310,575,50,50,TWO_PI,PI-HALF_PI,PIE);
+  line(1310,575,1330,590);
+  line(1310,575,1310,600);
+  line(1310,575,1322,595.5);
+  line(1310,575,1332.5,580);
+
+  // deuren
+  stroke(120,120,120,10);
+  arc(1165,620,50,50,PI+HALF_PI,TWO_PI,PIE);
+  arc(1285,655,50,50,PI,PI+HALF_PI,PIE);
+  arc(1240,605,50,50,PI,PI+HALF_PI,PIE);
+  arc(1200,655,50,50,HALF_PI-PI,HALF_PI-HALF_PI,PIE);
+
+  // tekening 14: ark van noach
+  stroke(0);
+  strokeWeight(2);
+  fill("#d79120");
+  rect(1605,40,80,20);
+  fill("#b37a1e");
+  arc(1645,60,130,80,0,PI,PIE);
+  line(1580,60,1580,50);
+  line(1580,50,1585,60);
+  line(1710,60,1710,50);
+  line(1710,50,1705,60);
+  quad(1600,40,1610,30,1680,30,1690,40);
+  noStroke();
+  fill(50,92,218,200);
+  rect(1550,80,200,60);
     // heb het zo efficiënt mogelijk proberen te maken door kleuren te sorteren
 }
 
@@ -1018,93 +1143,93 @@ function sipan() {
 
   push();
 
-  translate(850, 520);
+  translate(850,520);
   scale(0.24);
-  translate(-2, -2);
+  translate(-2,-2);
 
   stroke(0);
   strokeWeight(3);
 
-  line(2, 5, 50, 20);
-  line(50, 20, 53, 2);
-  line(53, 2, 135, 40);
-  line(135, 40, 155, 23);
-  line(155, 23, 173, 20);
-  line(173, 20, 212, 52);
-  line(212, 52, 230, 53);
-  line(230, 53, 213, 18);
-  line(213, 18, 242, 21);
-  line(242, 21, 316, 52);
-  line(316, 52, 345, 87);
-  line(345, 87, 377, 115);
-  line(377, 115, 376, 155);
-  line(376, 155, 398, 152);
-  line(398, 152, 398, 175);
-  line(398, 175, 423, 181);
-  line(423, 181, 490, 218);
-  line(490, 218, 528, 244);
-  line(528, 244, 531, 255);
-  line(531, 255, 550, 244);
-  line(550, 244, 593, 273);
-  line(593, 273, 644, 299);
-  line(644, 299, 652, 296);
-  line(652, 296, 667, 309);
-  line(667, 309, 676, 332);
-  line(676, 332, 714, 342);
-  line(714, 342, 726, 337);
-  line(726, 337, 737, 346);
-  line(737, 346, 738, 376);
-  line(738, 376, 782, 390);
-  line(782, 390, 812, 417);
-  line(812, 417, 825, 435);
-  line(825, 435, 838, 465);
-  line(838, 465, 891, 491);
-  line(891, 491, 892, 519);
-  line(892, 519, 930, 526);
-  line(930, 526, 968, 590);
-  line(968, 590, 960, 628);
-  line(960, 628, 906, 646);
-  line(906, 646, 868, 660);
-  line(868, 660, 883, 686);
-  line(883, 686, 911, 699);
-  line(911, 699, 943, 724);
-  line(943, 724, 915, 725);
-  line(915, 725, 897, 749);
-  line(897, 749, 872, 741);
-  line(872, 741, 848, 771);
-  line(848, 771, 843, 804);
-  line(843, 804, 861, 833);
-  line(861, 833, 798, 806);
-  line(798, 806, 726, 766);
-  line(726, 766, 737, 743);
-  line(737, 743, 688, 715);
-  line(688, 715, 638, 670);
-  line(638, 670, 593, 611);
-  line(593, 611, 532, 593);
-  line(532, 593, 497, 549);
-  line(497, 549, 476, 553);
-  line(476, 553, 410, 535);
-  line(410, 535, 367, 514);
-  line(367, 514, 343, 474);
-  line(343, 474, 283, 436);
-  line(283, 436, 258, 402);
-  line(258, 402, 226, 395);
-  line(226, 395, 137, 332);
-  line(137, 332, 144, 315);
-  line(144, 315, 200, 339);
-  line(200, 339, 269, 397);
-  line(269, 397, 294, 395);
-  line(294, 395, 356, 427);
-  line(356, 427, 366, 406);
-  line(366, 406, 307, 356);
-  line(307, 356, 285, 313);
-  line(285, 313, 247, 298);
-  line(247, 298, 210, 232);
-  line(210, 232, 189, 207);
-  line(189, 207, 176, 158);
-  line(176, 158, 148, 138);
-  line(148, 138, 127, 113);
-  line(127, 113, 113, 113);
-  line(113, 113, 2, 5);
+  line(2,5,50,20);
+  line(50,20,53,2);
+  line(53,2,135,40);
+  line(135,40,155,23);
+  line(155,23,173,20);
+  line(173,20,212,52);
+  line(212,52,230,53);
+  line(230,53,213,18);
+  line(213,18,242,21);
+  line(242,21,316,52);
+  line(316,52,345,87);
+  line(345,87,377,115);
+  line(377,115,376,155);
+  line(376,155,398,152);
+  line(398,152,398,175);
+  line(398,175,423,181);
+  line(423,181,490,218);
+  line(490,218,528,244);
+  line(528,244,531,255);
+  line(531,255,550,244);
+  line(550,244,593,273);
+  line(593,273,644,299);
+  line(644,299,652,296);
+  line(652,296,667,309);
+  line(667,309,676,332);
+  line(676,332,714,342);
+  line(714,342,726,337);
+  line(726,337,737,346);
+  line(737,346,738,376);
+  line(738,376,782,390);
+  line(782,390,812,417);
+  line(812,417,825,435);
+  line(825,435,838,465);
+  line(838,465,891,491);
+  line(891,491,892,519);
+  line(892,519,930,526);
+  line(930,526,968,590);
+  line(968,590,960,628);
+  line(960,628,906,646);
+  line(906,646,868,660);
+  line(868,660,883,686);
+  line(883,686,911,699);
+  line(911,699,943,724);
+  line(943,724,915,725);
+  line(915,725,897,749);
+  line(897,749,872,741);
+  line(872,741,848,771);
+  line(848,771,843,804);
+  line(843,804,861,833);
+  line(861,833,798,806);
+  line(798,806,726,766);
+  line(726,766,737,743);
+  line(737,743,688,715);
+  line(688,715,638,670);
+  line(638,670,593,611);
+  line(593,611,532,593);
+  line(532,593,497,549);
+  line(497,549,476,553);
+  line(476,553,410,535);
+  line(410,535,367,514);
+  line(367,514,343,474);
+  line(343,474,283,436);
+  line(283,436,258,402);
+  line(258,402,226,395);
+  line(226,395,137,332);
+  line(137,332,144,315);
+  line(144,315,200,339);
+  line(200,339,269,397);
+  line(269,397,294,395);
+  line(294,395,356,427);
+  line(356,427,366,406);
+  line(366,406,307,356);
+  line(307,356,285,313);
+  line(285,313,247,298);
+  line(247,298,210,232);
+  line(210,232,189,207);
+  line(189,207,176,158);
+  line(176,158,148,138);
+  line(148,138,127,113);
+  line(127,113,113,113);
+  line(113,113,2,5);
   pop();
 }
