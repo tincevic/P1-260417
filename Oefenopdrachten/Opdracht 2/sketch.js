@@ -1,4 +1,4 @@
-let x = 20;
+let x;
 let y = 20;
 let groet = "greetings";
 let isAWhole;
@@ -14,6 +14,7 @@ let division;
   
 function setup() {
   createCanvas(400, 400);
+  x = floor(random(30))+10;
   a = round(random(100), 1); // ik rond alles hierna af op 3 decimalen want soms wordt er bij optellen bijvoorbeeld 1285.00000000000001 weergegeven
   b = round(random(50), 1);
   addition = round(a+b, 3); // ik tel a en b op
