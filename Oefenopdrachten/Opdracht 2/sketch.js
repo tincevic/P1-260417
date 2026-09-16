@@ -15,7 +15,7 @@ let division;
 function setup() {
   createCanvas(400, 400);
   x = floor(random(30))+10;
-  a = round(random(100), 1); // ik rond alles hierna af op 3 decimalen want soms wordt er bij optellen bijvoorbeeld 1285.00000000000001 weergegeven
+  a = round(random(100), 1); // ik rond alles hierna af op 3 decimalen want soms wordt er bij optellen bijvoorbeeld 128.50000000000001 weergegeven
   b = round(random(50), 1);
   addition = round(a+b, 3); // ik tel a en b op
   subtraction = round(a-b, 3); // ik tref b van a af
