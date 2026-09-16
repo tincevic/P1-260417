@@ -118,7 +118,7 @@ function draw() {
   strokeWeight(2);
   fill(40);
   beginShape();
-  vertex(x2car,725);
+  vertex(x2car,685);
   vertex(x2car,725);
   vertex(x2car+100,725);
   vertex(x2car+100,705);
