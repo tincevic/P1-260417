@@ -5,6 +5,9 @@ let cspeed;
 let xcar;
 let c2speed;
 let x2car;
+let runlight;
+let x3car;
+let c3speed;
 
 function setup() {
   createCanvas(1000, 800);
@@ -14,6 +17,7 @@ function setup() {
   xcar = 0;
   x2car = 0;
   c2speed = 1.5;
+  runlight = 0;
 }
 
 function draw() {
@@ -78,7 +82,11 @@ function draw() {
 
   // auto 1
   if (licht === 0) {
+    if (runlight >= 70) {
+      cspeed = 3;
+    } else {
     cspeed = 0;
+    }
   } else if (licht === 1) {
     cspeed = random(1.25,1.75);
   } else if (licht === 2) {
@@ -107,7 +115,11 @@ function draw() {
 
   // auto 2
   if (licht === 0) {
+    if (runlight >= 70) {
+      c2speed = 5;
+    } else {
     c2speed = 0;
+    }
   } else if (licht === 1) {
     c2speed = random(0.75,1.25);
   } else if (licht === 2) {
@@ -134,14 +146,47 @@ function draw() {
     x2car = -150
   }
 
+  // auto 3
+  if (runlight >= 70) {
+    c3speed = 3.5;
+  } else {
+    c3speed = 0;
+    x3car = 200
+  } 
+  noStroke();
+  fill(255,144,3);
+  beginShape();
+  vertex(x3car+0,702);
+  vertex(x3car+12,702);
+  vertex(x3car+43,688);
+  vertex(x3car+72,687);
+  vertex(x3car+84,698);
+  vertex(x3car+103,699);
+  vertex(x3car+123,704);
+  vertex(x3car+123,716);
+  vertex(x3car+110,721);
+  vertex(x3car+110,710);
+  vertex(x3car+95,710);
+  vertex(x3car+89,723);
+  vertex(x3car+39,723);
+  vertex(x3car+35,711);
+  vertex(x3car+23,711);
+  vertex(x3car+19,720);
+  vertex(x3car+4,718);
+  vertex(x3car+0,713);
+  endShape();
 
   // stoplicht
-  strokeWeight(4);
-  fill(120);
-  stroke(140);
+  noStroke();
+  fill(100);
+  rect(530,700,25,50);
+  rect(520,580,50,135);
+  strokeWeight(3);
+  fill(115);
+  stroke(150);
   rect(522.5,700,25,50);
-  fill(140);
-  stroke(160);
+  fill(128);
+  stroke(180);
   rect(510,580,50,135);
   if (licht === 0) {
     fill(220,0,0);
@@ -173,6 +218,9 @@ function keyPressed() {
   if (key === 'Enter') {
     if (licht === 0) {
       licht = 2
+    } else if (licht === 1) {
+      licht--
+      runlight = floor(random(72));
     } else {
       licht--
     }
