@@ -2,30 +2,72 @@ let licht;
 let time;
 let tspeed;
 let cspeed;
+let car1Color;
 let xcar;
 let c2speed;
+let car2Color;
 let x2car;
 let runlight;
 let x3car;
 let c3speed;
+let carchange;
+let inProc;
+let horn;
+let dixie;
+let debugActive;
+let rad = 350;
+let dayCycle = 0;
+let cycleSpeed = 0.005;
 
 function setup() {
   createCanvas(1000, 800);
   licht = 2;
-  time = 1;
-  tspeed = 0.0026;
   xcar = 0;
   x2car = 0;
   c2speed = 1.5;
   runlight = 0;
+  c3speed = 0;
+  x3car = -200;
+  carchange = false;
+  inProc = false;
+  car1Color = color(random(255),random(255),random(255));
+  car2Color = color(random(255),random(255),random(255));
+  dixie = loadSound('/../Assets/dixie.mp3');
+  horn = loadSound('/../Assets/horn.mp3');
+  debugActive = false
 }
 
 function draw() {
-  background(69*time,192*time,226*time);
-  time += tspeed
-  if (time >= 1 || time <= 0) { // dag-nacht cyclus
-    tspeed *= -1;
+  
+  // zon en maan / dagcyclus
+
+  dayCycle += cycleSpeed;
+  if (dayCycle >= TWO_PI) {
+    dayCycle = 0;
   }
+  time = (-sin(dayCycle-HALF_PI) + 1) / 2;
+  background(69*time,192*time,226*time);
+  let centX = width/2;
+  let centY = height/2;
+
+  let sunCycle = dayCycle-HALF_PI;
+
+  let xSun = centX+rad*cos(sunCycle);
+  let ySun = centY+rad*sin(sunCycle);
+
+  fill(255,204,0);
+  noStroke();
+  circle(xSun,ySun,100);
+  
+  let nightCycle = sunCycle+PI;
+
+  let xMoon = centX+rad*cos(nightCycle);
+  let yMoon = centY+rad*sin(nightCycle);
+
+  fill(128);
+  noStroke();
+  circle(xMoon,yMoon,30);
+
   fill(20,100,20);
   stroke(25,110,25);
   strokeWeight(10);
@@ -65,9 +107,29 @@ function draw() {
   triangle(280,250,240,350,343,350);
   triangle(500,340,490,370,531,380);
 
+  // bomen
+  noStroke();
+  fill(71,50,22);
+  rect(80,550,20,100);
+  rect(140,560,20,100);
+  rect(210,580,20,100);
+  rect(320,550,20,100);
+  rect(450,540,20,100);
+  rect(840,580,20,100);
+  rect(910,530,20,100);
+  fill(20,130,0);
+  quad(55,545,90,510,125,545,90,580);
+  quad(115,555,150,520,185,555,150,590);
+  quad(185,575,220,540,255,575,220,610);
+  quad(295,545,330,510,365,545,330,580);
+  quad(425,535,460,500,495,535,460,570);
+  quad(815,575,850,540,885,575,850,610);
+  quad(885,525,920,490,955,525,920,560);
+
   // weg + brug
   stroke(128);
   fill(56);
+  strokeWeight(5);
   rect(-10,625,1100,125);
   fill(45);
   quad(500,625,550,750,825,750,775,625);
@@ -78,7 +140,8 @@ function draw() {
     rect(xx,687.5,25,5);
   }
   rect(300,677.5,625,3);
-  text(licht,10,15); // debug
+
+  // lantaarnpaal
 
   // auto 1
   if (licht === 0) {
@@ -93,42 +156,53 @@ function draw() {
     cspeed = random(1.75,2.25);
   }
   xcar += cspeed
-  stroke(100);
+  stroke(220);
   strokeWeight(2);
-  fill(40);
+  fill(car1Color);
   beginShape();
   vertex(xcar,635);
   vertex(xcar,675);
   vertex(xcar+100,675);
-  vertex(xcar+100,655);
+  vertex(xcar+95,655);
   vertex(xcar+70,655);
-  vertex(xcar+70,635);
-  vertex(xcar+0,635);
+  vertex(xcar+50,635);
+  vertex(xcar+20,635);
+  vertex(xcar+0,655);
   endShape();
+  if (time < 0.5) {
+    noStroke();
+    fill(255,255,0,150);
+    triangle(xcar+100,665,xcar+150,675,xcar+150,645);
+  }
   fill(20);
   stroke(60);
   circle(xcar+20,675,30);
   circle(xcar+80,675,30);
   if (xcar >= 1000) {
-    xcar = -150
+    xcar = -200
+    car1Color = color(random(255),random(255),random(255));
   }
 
   // auto 2
   if (licht === 0) {
-    if (runlight >= 70) {
-      c2speed = 5;
+    if (runlight === 50 || runlight === 51) {
+      if (carchange === true && x2car <= -100) {
+        c2speed = 0;
+      } else {
+        c2speed = 4.5;
+      }
     } else {
     c2speed = 0;
     }
-  } else if (licht === 1) {
+  } else if (licht === 1 && carchange === false) {
     c2speed = random(0.75,1.25);
-  } else if (licht === 2) {
+  } else if (licht === 2 && carchange === false) {
     c2speed = random(1.25,1.75);
   }
   x2car += c2speed
-  stroke(100);
+  stroke(220);
   strokeWeight(2);
-  fill(40);
+  fill(car2Color);
   beginShape();
   vertex(x2car,685);
   vertex(x2car,725);
@@ -138,23 +212,37 @@ function draw() {
   vertex(x2car+70,685);
   vertex(x2car+0,685);
   endShape();
+  if (time < 0.5) {
+    noStroke();
+    fill(255,255,0,150);
+    triangle(x2car+100,715,x2car+150,725,x2car+150,695);
+  }
   fill(20);
   stroke(60);
   circle(x2car+20,725,30);
   circle(x2car+80,725,30);
   if (x2car >= 1000) {
-    x2car = -150
+    x2car = -200;
+    car2Color = color(random(255),random(255),random(255));
+    if (inProc === true) {
+      carchange = true;
+    }
   }
 
   // auto 3
-  if (runlight >= 70) {
-    c3speed = 3.5;
+  if ((runlight === 50 || runlight === 51) && carchange === true) {
+    c3speed = 4.5;
   } else {
     c3speed = 0;
-    x3car = 200
-  } 
-  noStroke();
-  fill(255,144,3);
+  }
+  x3car += c3speed;
+  stroke(70);
+  strokeWeight(2);
+  fill(20);
+  circle(x3car+28.5,720,20);
+  circle(x3car+101,720,20);
+  stroke(128,70,0);
+  fill(196,107,0);
   beginShape();
   vertex(x3car+0,702);
   vertex(x3car+12,702);
@@ -175,7 +263,27 @@ function draw() {
   vertex(x3car+4,718);
   vertex(x3car+0,713);
   endShape();
-
+  if (time < 0.5) {
+    noStroke();
+    fill(255,255,0,200);
+    triangle(x3car+123,710,x3car+200,725,x3car+200,695);
+  }
+  fill(0);
+  textSize(20);
+  textStyle(BOLD);
+  stroke(255);
+  strokeWeight(1.5);
+  text("01",x3car+50,715);
+  if (x3car >= 1000) {
+    x3car = -200
+    if (inProc === false) {
+      c3speed = 0;
+      runlight = 1;
+      inProc === false;
+      carchange = false;
+    }
+  }
+  
   // stoplicht
   noStroke();
   fill(100);
@@ -212,17 +320,57 @@ function draw() {
     fill(0,160,0);
   }
   circle(535,687.5,30);
+
+  // boom
+  noStroke()
+  fill(71,50,22);
+  rect(460,680,20,100);
+  rect(950,690,20,80);
+  fill(20,130,0);
+  quad(425,675,472,630,520,675,472,720);
+  quad(912,685,962,640,1012,685,962,730);
+
+  if (debugActive === true) {
+    fill(255);
+    noStroke();
+    text("welcome 2 the dawn debug menu",10,20)
+    rect(150,12.5,55,2.5);
+    text("licht: "+licht,10,35); // debug
+    text("3rd car on road: "+str(carchange),10,50);
+    text("3rd car staying: "+str(inProc),10,65);
+    text("time: "+str(time),10,80);
+  }
 }
 
 function keyPressed() {
   if (key === 'Enter') {
     if (licht === 0) {
       licht = 2
+      inProc = false;
     } else if (licht === 1) {
       licht--
-      runlight = floor(random(72));
-    } else {
+      runlight = floor(random(73));
+      if (runlight === 50 || runlight === 51) {
+        inProc = true;
+        carchange = true;
+      }
+    } else if (licht === 2) {
       licht--
     }
+  } else if (key === 'd') {
+    if (debugActive === false) {
+      debugActive = true;
+    } else {
+      debugActive = false;
+    }
+    
+  }
+}   
+
+function mouseClicked() {
+  if ((mouseX >= xcar && mouseY >= 635) && (mouseX <= xcar+100 && mouseY <= 675) || ((mouseX >= x2car && mouseY >= 685) && (mouseX <= x2car+100 && mouseY <= 725))) {
+    horn.play()
+  } else if ((mouseX >= x3car && mouseY >= 687) && (mouseX <= x3car+100 && mouseY <= 723)) {
+    dixie.play()
   }
 }
