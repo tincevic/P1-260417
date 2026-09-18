@@ -18,6 +18,8 @@ let debugActive;
 let rad = 350;
 let dayCycle = 0;
 let cycleSpeed = 0.005;
+let leaf;
+let dir;
 
 function setup() {
   createCanvas(1000, 800);
@@ -34,7 +36,9 @@ function setup() {
   car2Color = color(random(255),random(255),random(255));
   dixie = loadSound('/../Assets/dixie.mp3');
   horn = loadSound('/../Assets/horn.mp3');
-  debugActive = false
+  debugActive = false;
+  dir = "r";
+  leaf = 0;
 }
 
 function draw() {
@@ -56,7 +60,8 @@ function draw() {
   let ySun = centY+rad*sin(sunCycle);
 
   fill(255,204,0);
-  noStroke();
+  stroke(255,255,0);
+  strokeWeight(abs(leaf)+5);
   circle(xSun,ySun,100);
   
   let nightCycle = sunCycle+PI;
@@ -65,7 +70,8 @@ function draw() {
   let yMoon = centY+rad*sin(nightCycle);
 
   fill(128);
-  noStroke();
+  stroke(230);
+  strokeWeight((abs(leaf)/3)+3);
   circle(xMoon,yMoon,30);
 
   fill(20,100,20);
@@ -117,6 +123,27 @@ function draw() {
   rect(450,540,20,100);
   rect(840,580,20,100);
   rect(910,530,20,100);
+  if (dir === "r" && leaf <= 10) {
+    leaf += 0.1;
+    if (leaf >= 10) {
+      dir = "l";
+      leaf += 0.1;
+    }
+  } else if (dir === "l" && leaf >= -10) {
+    leaf += -0.1;
+    if (leaf <= -10) {
+      dir = "r";
+      leaf += 0.1;
+    }
+  }
+  fill(40,170,0);
+  quad(leaf+55,545,leaf+90,510,leaf+125,545,leaf+90,580);
+  quad(leaf+115,555,leaf+150,520,leaf+185,555,leaf+150,590);
+  quad(leaf+185,575,leaf+220,540,leaf+255,575,leaf+220,610);
+  quad(leaf+295,545,leaf+330,510,leaf+365,545,leaf+330,580);
+  quad(leaf+425,535,leaf+460,500,leaf+495,535,leaf+460,570);
+  quad(leaf+815,575,leaf+850,540,leaf+885,575,leaf+850,610);
+  quad(leaf+885,525,leaf+920,490,leaf+955,525,leaf+920,560);
   fill(20,130,0);
   quad(55,545,90,510,125,545,90,580);
   quad(115,555,150,520,185,555,150,590);
@@ -156,7 +183,7 @@ function draw() {
     cspeed = random(1.75,2.25);
   }
   xcar += cspeed
-  stroke(220);
+  stroke(car1Color);
   strokeWeight(2);
   fill(car1Color);
   beginShape();
@@ -200,7 +227,7 @@ function draw() {
     c2speed = random(1.25,1.75);
   }
   x2car += c2speed
-  stroke(220);
+  stroke(car2Color);
   strokeWeight(2);
   fill(car2Color);
   beginShape();
@@ -326,6 +353,9 @@ function draw() {
   fill(71,50,22);
   rect(460,680,20,100);
   rect(950,690,20,80);
+  fill(40,170,0);
+  quad(leaf+425,675,leaf+472,630,leaf+520,675,leaf+472,720);
+  quad(leaf+912,685,leaf+962,640,leaf+1012,685,leaf+962,730);
   fill(20,130,0);
   quad(425,675,472,630,520,675,472,720);
   quad(912,685,962,640,1012,685,962,730);
@@ -339,6 +369,8 @@ function draw() {
     text("3rd car on road: "+str(carchange),10,50);
     text("3rd car staying: "+str(inProc),10,65);
     text("time: "+str(time),10,80);
+    text("leaf x: "+leaf,10,95);
+    text("leaf dir: "+dir,10,110);
   }
 }
 
