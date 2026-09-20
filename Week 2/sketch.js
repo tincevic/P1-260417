@@ -411,7 +411,7 @@ function keyPressed() {
       inProc = false;
     } else if (licht === 1) {
       licht--
-      runlight = floor(random(48,53));
+      runlight = floor(random(72));
       if (runlight === 50 || runlight === 51) {
         inProc = true;
         carchange = true;
