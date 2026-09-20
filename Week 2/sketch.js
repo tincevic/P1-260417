@@ -285,7 +285,7 @@ function draw() {
   }
 
   // auto 3
-  if ((runlight === 50 || runlight === 51) && carchange === true) { // RNG. als auto 2 door rood gaat, vervangt de general Lee zijn plaatst tot het weer groen wordt
+  if ((runlight === 50 || runlight === 51) && carchange === true) { // RNG. als auto 2 door rood gaat, neemt de general Lee zijn plaatst tot het weer groen wordt
     c3speed = 4.5;
   } else {
     c3speed = 0;
@@ -388,7 +388,7 @@ function draw() {
   quad(425,675,472,630,520,675,472,720);
   quad(912,685,962,640,1012,685,962,730);
 
-  if (debugActive === true) { // debug-menu. op d drukken op de keyboard activeert 'm. 
+  if (debugActive === true) { // debug-menu. op d drukken op het keyboard activeert 'm. 
     fill(255);
     noStroke();
     text("welcome 2 the dawn debug menu",10,20)
