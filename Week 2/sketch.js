@@ -53,18 +53,18 @@ function draw() {
   
   // zon en maan / dagcyclus
 
-  dayCycle += cycleSpeed;
-  if (dayCycle >= TWO_PI) {
+  dayCycle += cycleSpeed; // cyclus gaat met cycleSpeed verder
+  if (dayCycle >= TWO_PI) { // resetten bij 360 graden
     dayCycle = 0;
   }
-  time = (-sin(dayCycle-HALF_PI) + 1) / 2;
-  background(69*time,192*time,226*time);
-  let centX = width/2;
+  time = (-sin(dayCycle-HALF_PI) + 1) / 2; // van -1 en 1 naar 0 en 1
+  background(69*time,192*time,226*time); // achtergrond wordt donkerder afhankelijk van hoe laat het is
+  let centX = width/2; // de straal is de helft van de diameter
   let centY = height/2;
 
-  let sunCycle = dayCycle-HALF_PI;
+  let sunCycle = dayCycle-HALF_PI; // zon met 90 graden verplaatsen anders was het niet in sync
 
-  let xSun = centX+rad*cos(sunCycle);
+  let xSun = centX+rad*cos(sunCycle); // om een cirkel heen gaan (rad = radius)
   let ySun = centY+rad*sin(sunCycle);
 
   fill(255,204,0);
@@ -72,7 +72,7 @@ function draw() {
   strokeWeight(abs(leaf)+5);
   circle(xSun,ySun,100);
   
-  let nightCycle = sunCycle+PI;
+  let nightCycle = sunCycle+PI; // altijd tegenover de zon
 
   let xMoon = centX+rad*cos(nightCycle);
   let yMoon = centY+rad*sin(nightCycle);
@@ -97,12 +97,12 @@ function draw() {
   // wolken
   noStroke();
   fill(255);
-  cloudx -= cloudxr 
-  cloud2x -= cloud2xr 
-  if (cloudx <= -100) {
+  cloudx -= cloudxr // verplaatsing naar links
+  cloud2x -= cloud2xr // ||
+  if (cloudx <= -100) { // zodra 'ie out of bounds is, zet ik 'm terug
     cloudx = 1100;
   }
-  if (cloud2x <= -300) {
+  if (cloud2x <= -300) { // ||
     cloud2x = 1100;
   }
 
@@ -153,7 +153,7 @@ function draw() {
   rect(450,540,20,100);
   rect(840,580,20,100);
   rect(910,530,20,100);
-  if (dir === "r" && leaf <= 10) {
+  if (dir === "r" && leaf <= 10) { // leaf zorgt voor beweging van de lichtgroene bladeren. "r" is rechts en "l" is links. de bladeren gaat links en rechts
     leaf += 0.1;
     if (leaf >= 10) {
       dir = "l";
@@ -198,8 +198,6 @@ function draw() {
   }
   rect(300,677.5,625,3);
 
-  // lantaarnpaal
-
   // auto 1
   if (licht === 0) {
     if (runlight >= 70) {
@@ -226,7 +224,7 @@ function draw() {
   vertex(xcar+20,635);
   vertex(xcar+0,655);
   endShape();
-  if (time < 0.5) {
+  if (time < 0.5) { // licht
     noStroke();
     fill(255,255,0,150);
     triangle(xcar+100,665,xcar+150,675,xcar+150,645);
@@ -235,14 +233,14 @@ function draw() {
   stroke(60);
   circle(xcar+20,675,30);
   circle(xcar+80,675,30);
-  if (xcar >= 1000) {
+  if (xcar >= 1000) { // zodra 'ie out of bounds is, zet ik 'm terug
     xcar = -200
     car1Color = color(random(255),random(255),random(255));
   }
 
   // auto 2
-  if (licht === 0) {
-    if (runlight === 50 || runlight === 51) {
+  if (licht === 0) { // rood
+    if (runlight === 50 || runlight === 51) { // general lee RNG; wordt bij auto 3 uitgelegd
       if (carchange === true && x2car <= -100) {
         c2speed = 0;
       } else {
@@ -251,9 +249,9 @@ function draw() {
     } else {
     c2speed = 0;
     }
-  } else if (licht === 1 && carchange === false) {
+  } else if (licht === 1 && carchange === false) { // oranje
     c2speed = random(0.75,1.25);
-  } else if (licht === 2 && carchange === false) {
+  } else if (licht === 2 && carchange === false) { // groen
     c2speed = random(1.25,1.75);
   }
   x2car += c2speed
@@ -269,7 +267,7 @@ function draw() {
   vertex(x2car+70,685);
   vertex(x2car+0,685);
   endShape();
-  if (time < 0.5) {
+  if (time < 0.5) { // licht
     noStroke();
     fill(255,255,0,150);
     triangle(x2car+100,715,x2car+150,725,x2car+150,695);
@@ -278,7 +276,7 @@ function draw() {
   stroke(60);
   circle(x2car+20,725,30);
   circle(x2car+80,725,30);
-  if (x2car >= 1000) {
+  if (x2car >= 1000) { // zodra 'ie out of bounds is, zet ik 'm terug
     x2car = -200;
     car2Color = color(random(255),random(255),random(255));
     if (inProc === true) {
@@ -287,7 +285,7 @@ function draw() {
   }
 
   // auto 3
-  if ((runlight === 50 || runlight === 51) && carchange === true) {
+  if ((runlight === 50 || runlight === 51) && carchange === true) { // RNG. als auto 2 door rood gaat, vervangt de general Lee zijn plaatst tot het weer groen wordt
     c3speed = 4.5;
   } else {
     c3speed = 0;
@@ -320,7 +318,7 @@ function draw() {
   vertex(x3car+4,718);
   vertex(x3car+0,713);
   endShape();
-  if (time < 0.5) {
+  if (time < 0.5) { // licht
     noStroke();
     fill(255,255,0,200);
     triangle(x3car+123,710,x3car+200,725,x3car+200,695);
@@ -330,8 +328,8 @@ function draw() {
   textStyle(BOLD);
   stroke(255);
   strokeWeight(1.5);
-  text("01",x3car+50,715);
-  if (x3car >= 1000) {
+  text("01",x3car+50,715); // general Lee!
+  if (x3car >= 1000) { // zodra 'ie out of bounds is, zet ik 'm terug
     x3car = -200
     if (inProc === false) {
       c3speed = 0;
@@ -353,7 +351,7 @@ function draw() {
   fill(128);
   stroke(180);
   rect(510,580,50,135);
-  if (licht === 0) {
+  if (licht === 0) { // als het rood is
     fill(220,0,0);
     stroke(255,0,0);
   } else {
@@ -361,7 +359,7 @@ function draw() {
     fill(160,0,0);
   }
   circle(535,607.5,30);
-  if (licht === 1) {
+  if (licht === 1) { // als het geel is
     fill(220,110,0);
     stroke(255,127,0);
   } else {
@@ -369,7 +367,7 @@ function draw() {
     fill(160,80,0);
   }
   circle(535,647.5,30);
-  if (licht === 2) {
+  if (licht === 2) { // als het groen is
     fill(0,220,0);
     stroke(0,255,0);
   } else {
@@ -390,7 +388,7 @@ function draw() {
   quad(425,675,472,630,520,675,472,720);
   quad(912,685,962,640,1012,685,962,730);
 
-  if (debugActive === true) {
+  if (debugActive === true) { // debug-menu. op d drukken op de keyboard activeert 'm. 
     fill(255);
     noStroke();
     text("welcome 2 the dawn debug menu",10,20)
