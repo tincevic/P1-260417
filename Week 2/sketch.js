@@ -20,6 +20,10 @@ let dayCycle = 0;
 let cycleSpeed = 0.005;
 let leaf;
 let dir;
+let cloudx;
+let cloud2x;
+let cloudxr;
+let cloud2xr;
 
 function setup() {
   createCanvas(1000, 800);
@@ -39,6 +43,10 @@ function setup() {
   debugActive = false;
   dir = "r";
   leaf = 0;
+  cloudx = 800;
+  cloud2x = cloudx*random(0.5,1.6);
+  cloudxr = random(1.8,2);
+  cloud2xr = random(1.2,2.8);
 }
 
 function draw() {
@@ -85,6 +93,28 @@ function draw() {
   triangle(300,600,500,340,700,600);
   fill(80);
   triangle(300,600,500,340,420,600);
+
+  // wolken
+  noStroke();
+  fill(255);
+  cloudx -= cloudxr 
+  cloud2x -= cloud2xr 
+  if (cloudx <= -100) {
+    cloudx = 1100;
+  }
+  if (cloud2x <= -300) {
+    cloud2x = 1100;
+  }
+
+  ellipse(cloudx,205,40,40);
+  ellipse(cloudx+40,190,50,50);
+  ellipse(cloudx+80,200,40,40);
+  ellipse(cloudx+40,200,80,50);
+
+  ellipse(cloud2x+200,155,40,40);
+  ellipse(cloud2x+240,130,50,50);
+  ellipse(cloud2x+280,150,40,40);
+  ellipse(cloud2x+240,150,80,50);
 
   // rivier
   fill(26,120,167);
@@ -381,7 +411,7 @@ function keyPressed() {
       inProc = false;
     } else if (licht === 1) {
       licht--
-      runlight = floor(random(73));
+      runlight = floor(random(48,53));
       if (runlight === 50 || runlight === 51) {
         inProc = true;
         carchange = true;
