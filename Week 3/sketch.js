@@ -180,6 +180,7 @@ function draw() {
     textSize(20);
     fill(255);
     noStroke();
+    textFont("Arial");
     text("welcome 2 the dawn debug menu",10,20);
     rect(142.5,12.5,53,2.5);
     text("beurt: "+xo,10,40);
