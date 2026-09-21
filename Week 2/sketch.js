@@ -409,7 +409,7 @@ function keyPressed() {
       inProc = false;
     } else if (licht === 1) {
       licht--
-      runlight = floor(random(72));
+      runlight = round(random(72));
       if (runlight === 50 || runlight === 51) {
         inProc = true;
         carchange = true;
@@ -429,8 +429,8 @@ function keyPressed() {
 
 function mouseClicked() {
   if ((mouseX >= xcar && mouseY >= 635) && (mouseX <= xcar+100 && mouseY <= 675) || ((mouseX >= x2car && mouseY >= 685) && (mouseX <= x2car+100 && mouseY <= 725))) {
-    horn.play()
+    horn.play();
   } else if ((mouseX >= x3car && mouseY >= 687) && (mouseX <= x3car+100 && mouseY <= 723)) {
-    dixie.play()
+    dixie.play();
   }
 }
