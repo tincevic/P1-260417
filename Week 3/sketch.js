@@ -58,17 +58,61 @@ function draw() {
   strokeWeight(15);
   square(600,250,400,20);
   image(img,0,0);
-  fill(0,0,0,180);
   stroke(69,33,4);
   strokeWeight(4);
+  if (mouseX >= 615 && mouseY >= 265 && mouseX <= 725 && mouseY <= 375 && sq1 === 0) {
+    fill(0,0,0,210);
+  } else {
+    fill(0,0,0,180);
+  }
   square(615,265,110,20);
+  if (mouseX >= 745 && mouseY >= 265 && mouseX <= 855 && mouseY <= 375 && sq2 === 0) {
+    fill(0,0,0,210);
+  } else {
+    fill(0,0,0,180);
+  }
   square(745,265,110,20);
+  if (mouseX >= 875 && mouseY >= 265 && mouseX <= 985 && mouseY <= 375 && sq3 === 0) {
+    fill(0,0,0,210);
+  } else {
+    fill(0,0,0,180);
+  }
   square(875,265,110,20);
+  if (mouseX >= 615 && mouseY >= 395 && mouseX <= 725 && mouseY <= 505 && sq4 === 0) {
+    fill(0,0,0,210);
+  } else {
+    fill(0,0,0,180);
+  }
   square(615,395,110,20);
+  if (mouseX >= 745 && mouseY >= 395 && mouseX <= 855 && mouseY <= 505 && sq5 === 0) {
+    fill(0,0,0,210);
+  } else {
+    fill(0,0,0,180);
+  }
   square(745,395,110,20);
+  if (mouseX >= 875 && mouseY >= 395 && mouseX <= 985 && mouseY <= 505 && sq6 === 0) {
+    fill(0,0,0,210);
+  } else {
+    fill(0,0,0,180);
+  }
   square(875,395,110,20);
+  if (mouseX >= 615 && mouseY >= 525 && mouseX <= 725 && mouseY <= 635 && sq7 === 0) {
+    fill(0,0,0,210);
+  } else {
+    fill(0,0,0,180);
+  }
   square(615,525,110,20);
+  if (mouseX >= 745 && mouseY >= 525 && mouseX <= 855 && mouseY <= 635 && sq8 === 0) {
+    fill(0,0,0,210);
+  } else {
+    fill(0,0,0,180);
+  }
   square(745,525,110,20);
+  if (mouseX >= 875 && mouseY >= 525 && mouseX <= 985 && mouseY <= 635 && sq9 === 0) {
+    fill(0,0,0,210);
+  } else {
+    fill(0,0,0,180);
+  }
   square(875,525,110,20);
   noStroke();
   fill(180,180,0,120);
@@ -317,6 +361,19 @@ function draw() {
   textSize(50);
   textFont("Monospace");
   text("x "+xscore+" : "+oscore+" o",678,220);
+  if (winc === false && started === true && ended === false) {
+    textSize(20);
+    text("Ongoing...",750,175);
+  } else if (wino === true) {
+    textSize(20);
+    text("O wins!",765,175);
+  } else if (winx === true) {
+    textSize(20);
+    text("X wins!",765,175);
+  } else if (ended === true) {
+    textSize(20);
+    text("Draw!",775,175);
+  }
 
   // debug-menu
   if (debugActive === true) { // debug-menu. op d drukken op het keyboard activeert 'm. 
@@ -423,7 +480,7 @@ function mouseClicked() {
   if (((mouseX >= 500 && mouseY >= 750) && (mouseX <= 1100 && mouseY <= 850)) && (started === false || ended === true)) {
     if (started === false) {
     userStartAudio();
-    sound.loop();
+    // sound.loop();
     started = true;
     } else {
       ended = false;
