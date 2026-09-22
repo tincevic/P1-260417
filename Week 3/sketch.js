@@ -15,12 +15,20 @@ let sq9 = 0;
 let started = false;
 let ended = false;
 let nsdet = false;
+let xscore = 0;
+let oscore = 0;
+let win;
+let winc;
+let winx;
+let wino;
+let exec = false;
 
 function preload() {
   img = loadImage('/../Assets/hout.jpg'); // hout textuur laden
   img2 = loadImage('/../Assets/houtach.jpg'); // hout 2
   sound = loadSound('/../Assets/ostaris.mp3'); // muziekje
   chalk = loadSound('/../Assets/chalk.mp3'); // geluid
+  win = loadSound('/../Assets/win.mp3'); // geluid
 }
 function setup() {
   createCanvas(1600,900);
@@ -38,6 +46,9 @@ function setup() {
   startxo = 1;
   xo = 1; // 1 = x, 2 = o
   sound.setVolume(0.4);
+  winc = false;
+  winx = false;
+  wino = false;
 }
 
 function draw() {
@@ -95,6 +106,7 @@ function draw() {
     push();
     translate(100,600);
     textSize(450);
+    textFont("Monospace");
     textStyle(BOLD);
     angleMode(DEGREES);
     rotate(15);
@@ -108,6 +120,7 @@ function draw() {
     push();
     translate(100,600);
     textSize(450);
+    textFont("Monospace");
     textStyle(BOLD);
     angleMode(DEGREES);
     rotate(15);
@@ -212,31 +225,99 @@ function draw() {
   stroke(255);
   if (((sq1 === 1) && (sq2 === 1) && (sq3 === 1)) || ((sq1 === 2) && (sq2 === 2) && (sq3 === 2))) {
     ended = true;
+    winc = true;
+    if (sq1 === 1 && sq2 === 1 && sq3 === 1) {
+      winx = true;
+    } else {
+      wino = true;
+    }
     line(625,320,975,320);
   } else if (((sq4 === 1) && (sq5 === 1) && (sq6 === 1)) || ((sq4 === 2) && (sq5 === 2) && (sq6 === 2))) {
     ended = true;
+    winc = true;
+    if (sq4 === 1 && sq5 === 1 && sq6 === 1) {
+      winx = true;
+    } else {
+      wino = true;
+    }
     line(625,450,975,450);
   } else if (((sq7 === 1) && (sq8 === 1) && (sq9 === 1)) || ((sq7 === 2) && (sq8 === 2) && (sq9 === 2))) {
     ended = true;
+    winc = true;
+    if (sq7 === 1 && sq8 === 1 && sq9 === 1) {
+      winx = true;
+    } else {
+      wino = true;
+    }
     line(625,580,975,580);
   } else if (((sq1 === 1) && (sq4 === 1) && (sq7 === 1)) || ((sq1 === 2) && (sq4 === 2) && (sq7 === 2))) {
     ended = true;
+    winc = true;
+    if (sq1 === 1 && sq4 === 1 && sq7 === 1) {
+      winx = true;
+    } else {
+      wino = true;
+    }
     line(670,280,670,620);
   } else if (((sq2 === 1) && (sq5 === 1) && (sq8 === 1)) || ((sq2 === 2) && (sq5 === 2) && (sq8 === 2))) {
     ended = true;
+    winc = true;
+    if (sq2 === 1 && sq5 === 1 && sq8 === 1) {
+      winx = true;
+    } else {
+      wino = true;
+    }
     line(800,280,800,620);
   } else if (((sq3 === 1) && (sq6 === 1) && (sq9 === 1)) || ((sq3 === 2) && (sq6 === 2) && (sq9 === 2))) {
     ended = true;
+    winc = true;
+    if (sq1 === 3 && sq2 === 6 && sq3 === 9) {
+      winx = true;
+    } else {
+      wino = true;
+    }
     line(930,280,930,620);
   } else if (((sq3 === 1) && (sq5 === 1) && (sq7 === 1)) || ((sq3 === 2) && (sq5 === 2) && (sq7 === 2))) {
     ended = true;
+    winc = true;
+    if (sq3 === 1 && sq5 === 1 && sq7 === 1) {
+      winx = true;
+    } else {
+      wino = true;
+    }
     line(970,280,630,620);
   } else if (((sq1 === 1) && (sq5 === 1) && (sq9 === 1)) || ((sq1 === 2) && (sq5 === 2) && (sq9 === 2))) {
     ended = true;
+    winc = true;
+    if (sq1 === 1 && sq5 === 1 && sq9 === 1) {
+      winx = true;
+    } else {
+      wino = true;
+    }
     line(630,280,970,620);
   } else if (sq1 != 0 && sq2 != 0 && sq3 != 0 && sq4 != 0 && sq5 != 0 && sq6 != 0 && sq7 != 0 && sq8 != 0 && sq9 != 0) {
     ended = true;
   }
+  if (winc === true && exec === false) {
+    win.setVolume(3);
+    win.play();
+    if (winx === true) {
+      xscore += 1;
+      winx = false;
+      exec = true;
+    } else if (wino === true) {
+      oscore += 1;
+      wino = false;
+      exec = true; 
+    }
+    winc = false;
+  }
+  noStroke();
+  fill(255);
+  textSize(50);
+  textFont("Monospace");
+  text("x "+xscore+" : "+oscore+" o",678,220);
+
   // debug-menu
   if (debugActive === true) { // debug-menu. op d drukken op het keyboard activeert 'm. 
     textSize(20);
@@ -248,6 +329,8 @@ function draw() {
     text("beurt: "+xo,10,40);
     text("vierkanten: "+sq1+","+sq2+","+sq3+","+sq4+","+sq5+","+sq6+","+sq7+","+sq8+","+sq9,10,60)
     text("beurt begin: "+startxo,10,80);
+    text("win x: "+winx,10,100);
+    text("win o: "+wino,10,120);
   }
 }
 
@@ -355,5 +438,9 @@ function mouseClicked() {
     sq7 = 0;
     sq8 = 0;
     sq9 = 0;
+    winc = false;
+    wino = false;
+    winx = false;
+    exec = false;
   }
 }
