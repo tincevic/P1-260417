@@ -28,6 +28,18 @@ let menu = {x:1500,y:250};
 let menuAct = false;
 let colPlr1;
 let colPlr2;
+let clr1sel = true;
+let clr2sel = true;
+let clr3sel = false;
+let clr4sel = false;
+let clr5sel = false;
+let clr6sel = false;
+let clr7sel = false;
+let clr8sel = false;
+let clr9sel = false;
+let plr1col = 1;
+let plr2col = 2;
+let slctr;
 
 function preload() {
   img = loadImage('/../Assets/hout.jpg'); // hout textuur laden
@@ -63,6 +75,7 @@ function setup() {
   wino = false;
   colPlr1 = color(255);
   colPlr2 = color(60);
+  slctr = 1;
 }
 
 function draw() {
@@ -404,13 +417,235 @@ function draw() {
   fill(0,0);
   rect(menu.x,menu.y,400,400)
   fill(0,0,0,100);
-  rect(menu.x,menu.y,100,400);
-  fill(255);
+  rect(menu.x,menu.y,80,400);
+  fill(255); // wit
   stroke(200);
-  square(menu.x+120,menu.y+20,80,20);
-  fill(60);
+  square(menu.x+100,menu.y+20,80,20);
+  if (clr1sel === true) {
+    strokeWeight(10);
+    fill(0,80);
+    stroke(20);
+    square(menu.x+100,menu.y+20,80,20);
+    strokeWeight(7.5);
+    if (plr1col === 1) {
+      stroke(255);
+      line(menu.x+120,menu.y+40,menu.x+160,menu.y+80);
+      line(menu.x+160,menu.y+40,menu.x+120,menu.y+80);
+    } else if (plr2col === 1) {
+      stroke(255);
+      fill(0,0);
+      circle(menu.x+140,menu.y+60,45);
+    }
+  }
+  fill(60); // zwart
   stroke(30);
-  square(menu.x+220,menu.y+20,80,20);
+  square(menu.x+200,menu.y+20,80,20);
+  if (clr2sel === true) {
+    strokeWeight(10);
+    fill(255,80);
+    stroke(200);
+    square(menu.x+200,menu.y+20,80,20);
+    strokeWeight(7.5);
+    if (plr1col === 2) {
+      stroke(255);
+      line(menu.x+220,menu.y+40,menu.x+260,menu.y+80);
+      line(menu.x+260,menu.y+40,menu.x+220,menu.y+80);
+    } else if (plr2col === 2) {
+      stroke(255);
+      fill(0,0);
+      circle(menu.x+240,menu.y+60,45);
+    }
+  }
+  fill(200,20,20); // rood
+  stroke(170,10,10);
+  square(menu.x+300,menu.y+20,80,20);
+  if (clr3sel === true) {
+    fill(0,80);
+    strokeWeight(10);
+    stroke(20);
+    square(menu.x+300,menu.y+20,80,20);
+    strokeWeight(7.5);
+    if (plr1col === 3) {
+      stroke(255);
+      line(menu.x+320,menu.y+40,menu.x+360,menu.y+80);
+      line(menu.x+360,menu.y+40,menu.x+320,menu.y+80);
+    } else if (plr2col === 3) {
+      stroke(255);
+      fill(0,0);
+      circle(menu.x+340,menu.y+60,45);
+    }
+  }
+  fill(20,20,200); // blauw
+  stroke(10,10,170);
+  square(menu.x+100,menu.y+120,80,20);
+  if (clr4sel === true) {
+    fill(0,80);
+    strokeWeight(10);
+    stroke(20);
+    square(menu.x+100,menu.y+120,80,20);
+    strokeWeight(7.5);
+    if (plr1col === 4) {
+      stroke(255);
+      line(menu.x+120,menu.y+140,menu.x+160,menu.y+180);
+      line(menu.x+160,menu.y+140,menu.x+120,menu.y+180);
+    } else if (plr2col === 4) {
+      stroke(255);
+      fill(0,0);
+      circle(menu.x+140,menu.y+160,45);
+    }
+  }
+  fill(20,200,20); // groen
+  stroke(10,170,10);
+  square(menu.x+200,menu.y+120,80,20);
+  if (clr5sel === true) {
+    fill(0,80);
+    strokeWeight(10);
+    stroke(20);
+    square(menu.x+200,menu.y+120,80,20);
+    strokeWeight(7.5);
+    if (plr1col === 5) {
+      stroke(255);
+      line(menu.x+220,menu.y+140,menu.x+260,menu.y+180);
+      line(menu.x+260,menu.y+140,menu.x+220,menu.y+180);
+    } else if (plr2col === 5) {
+      stroke(255);
+      fill(0,0);
+      circle(menu.x+240,menu.y+160,45);
+    }
+  }
+  fill(200,200,20); // geel
+  stroke(170,170,10);
+  square(menu.x+300,menu.y+120,80,20);
+  if (clr6sel === true) {
+    fill(0,80);
+    strokeWeight(10);
+    stroke(20);
+    square(menu.x+300,menu.y+120,80,20);
+    strokeWeight(7.5);
+    if (plr1col === 6) {
+      stroke(255);
+      line(menu.x+320,menu.y+140,menu.x+360,menu.y+180);
+      line(menu.x+360,menu.y+140,menu.x+320,menu.y+180);
+    } else if (plr2col === 6) {
+      stroke(255);
+      fill(0,0);
+      circle(menu.x+340,menu.y+160,45);
+    }
+  }
+  fill(230,180,20); // oranje
+  stroke(185,120,10);
+  square(menu.x+150,menu.y+220,80,20);
+  if (clr7sel === true) {
+    fill(0,80);
+    strokeWeight(10);
+    stroke(20);
+    square(menu.x+150,menu.y+220,80,20);
+    strokeWeight(7.5);
+    if (plr1col === 4) {
+      stroke(255);
+      line(menu.x+170,menu.y+240,menu.x+210,menu.y+280);
+      line(menu.x+210,menu.y+240,menu.x+170,menu.y+280);
+    } else if (plr2col === 4) {
+      stroke(255);
+      fill(0,0);
+      circle(menu.x+190,menu.y+260,45);
+    }
+  }
+  fill(200,20,200); // paars
+  stroke(170,10,170);
+  square(menu.x+250,menu.y+220,80,20);
+  if (clr7sel === true) {
+    fill(0,80);
+    strokeWeight(10);
+    stroke(20);
+    square(menu.x+250,menu.y+220,80,20);
+    strokeWeight(7.5);
+    if (plr1col === 4) {
+      stroke(255);
+      line(menu.x+270,menu.y+240,menu.x+310,menu.y+280);
+      line(menu.x+310,menu.y+240,menu.x+270,menu.y+280);
+    } else if (plr2col === 4) {
+      stroke(255);
+      fill(0,0);
+      circle(menu.x+290,menu.y+260,45);
+    }
+  }
+  if (slctr === 1) {
+    stroke(255);
+    strokeWeight(12.5);
+  } else {
+    stroke(200);
+    strokeWeight(7.5);
+  }
+  line(menu.x+180,menu.y+350,menu.x+200,menu.y+370);
+  line(menu.x+200,menu.y+350,menu.x+180,menu.y+370);
+  if (slctr === 2) {
+    stroke(255);
+    strokeWeight(12.5);
+  } else {
+    stroke(200);
+    strokeWeight(7.5);
+  }
+  fill(0,0);
+  circle(menu.x+290,menu.y+360,30);
+
+
+  if (colPlr1 === color(255)) {
+    clr1sel = true;
+    plr1col = 1;
+  } else if (colPlr1 === color(60)) {
+    clr2sel = true;
+    plr1col = 2;
+  } else if (colPlr1 === color(200,20,20)) {
+    clr3sel = true;
+    plr1col = 3;
+  } else if (colPlr1 === color(20,20,200)) {
+    clr4sel = true;
+    plr1col = 4;
+  } else if (colPlr1 === color(20,200,20)) {
+    clr5sel = true;
+    plr1col = 5;
+  } else if (colPlr1 === color(200,200,20)) {
+    clr6sel = true;
+    plr1col = 6;
+  } else if (colPlr1 === color(230,180,20)) {
+    clr7sel = true;
+    plr1col = 7;
+  } else if (colPlr1 === color(200,20,200)) {
+    clr8sel = true;
+    plr1col = 8;
+  } else
+  if (colPlr2 === color(255)) {
+    clr1sel = true;
+    plr2col = 1;
+  } else if (colPlr2 === color(60)) {
+    clr2sel = true;
+    plr2col = 2;
+  } else if (colPlr2 === color(200,20,20)) {
+    clr3sel = true;
+    plr2col = 3;
+  } else if (colPlr2 === color(20,20,200)) {
+    clr4sel = true;
+    plr2col = 4;
+  } else if (colPlr2 === color(20,200,20)) {
+    clr5sel = true;
+    plr2col = 5;
+  } else if (colPlr2 === color(200,200,20)) {
+    clr6sel = true;
+    plr2col = 6;
+  } else if (colPlr2 === color(230,180,20)) {
+    clr7sel = true;
+    plr2col = 7;
+  } else if (colPlr2 === color(200,20,200)) {
+    clr8sel = true;
+    plr2col = 8;
+  } else if (colPlr1 === colPlr2) {
+    if (colPlr2 === color(60)) {
+      colPlr2 = color(255);
+    } else {
+      colPlr2 = color(60);
+    }
+  }
 
   // debug-menu
   if (debugActive === true) { // debug-menu. op d drukken op het keyboard activeert 'm. 
@@ -452,6 +687,36 @@ function mouseClicked() {
     .addTween(menu, 'myTween')
     .addMotion('x', 1500, 1500, 'easeInOutQuad') 
     .startTween();
+  }
+  if (menuAct === true) {
+    if ((mouseX >= menu.x+180 && mouseY >= menu.y+350) && (mouseX <= menu.x+200 && mouseY <= menu.y+370)) {
+      if (slctr != 1) {
+        slctr = 1;
+      }
+    } else if ((mouseX >= menu.x+280 && mouseY >= menu.y+350) && (mouseX <= menu.x+300 && mouseY <= menu.y+370)) {
+      if (slctr != 2) {
+        slctr = 2;
+      }
+    }
+    if ((((mouseX >= menu.x+100 && mouseY >= menu.y+20) && (mouseX <= menu.x+180 && mouseY <= menu.y+100)) && plr1col != 1) && colPlr1 != color(255) && colPlr2 != color(255)) {
+      if (slctr === 1) {
+        colPlr1 = color(255);
+      } else {
+        colPlr2 = color(255);
+      }
+    } else if ((((mouseX >= menu.x+200 && mouseY >= menu.y+20) && (mouseX <= menu.x+280 && mouseY <= menu.y+100)) && plr1col != 2) && colPlr1 != color(60) && colPlr2 != color(60)) {
+      if (slctr === 1) {
+        colPlr1 = color(60);
+      } else {
+        colPlr2 = color(60);
+      }
+    } else if ((((mouseX >= menu.x+300 && mouseY >= menu.y+20) && (mouseX <= menu.x+380 && mouseY <= menu.y+100)) && plr1col != 2) && colPlr1 != color(200,20,20) && colPlr2 != color(200,20,20)) {
+      if (slctr === 1) {
+        colPlr1 = color(200,20,20);
+      } else {
+        colPlr2 = color(200,20,20);
+      }
+    }
   }
   if (ended === false) {
   if ((((mouseX >= 615 && mouseY >= 265) && (mouseX <= 725 && mouseY <= 375)) && sq1 === 0) && started === true) {
