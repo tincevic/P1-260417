@@ -290,7 +290,8 @@ function draw() {
       wino = true;
     }
     line(625,320,975,320);
-  } else if (((sq4 === 1) && (sq5 === 1) && (sq6 === 1)) || ((sq4 === 2) && (sq5 === 2) && (sq6 === 2))) {
+  } // else
+  if (((sq4 === 1) && (sq5 === 1) && (sq6 === 1)) || ((sq4 === 2) && (sq5 === 2) && (sq6 === 2))) {
     ended = true;
     winc = true;
     if (sq4 === 1 && sq5 === 1 && sq6 === 1) {
@@ -299,7 +300,8 @@ function draw() {
       wino = true;
     }
     line(625,450,975,450);
-  } else if (((sq7 === 1) && (sq8 === 1) && (sq9 === 1)) || ((sq7 === 2) && (sq8 === 2) && (sq9 === 2))) {
+  } // else
+  if (((sq7 === 1) && (sq8 === 1) && (sq9 === 1)) || ((sq7 === 2) && (sq8 === 2) && (sq9 === 2))) {
     ended = true;
     winc = true;
     if (sq7 === 1 && sq8 === 1 && sq9 === 1) {
@@ -308,7 +310,8 @@ function draw() {
       wino = true;
     }
     line(625,580,975,580);
-  } else if (((sq1 === 1) && (sq4 === 1) && (sq7 === 1)) || ((sq1 === 2) && (sq4 === 2) && (sq7 === 2))) {
+  } // else
+  if (((sq1 === 1) && (sq4 === 1) && (sq7 === 1)) || ((sq1 === 2) && (sq4 === 2) && (sq7 === 2))) {
     ended = true;
     winc = true;
     if (sq1 === 1 && sq4 === 1 && sq7 === 1) {
@@ -317,7 +320,8 @@ function draw() {
       wino = true;
     }
     line(670,280,670,620);
-  } else if (((sq2 === 1) && (sq5 === 1) && (sq8 === 1)) || ((sq2 === 2) && (sq5 === 2) && (sq8 === 2))) {
+  } // else
+  if (((sq2 === 1) && (sq5 === 1) && (sq8 === 1)) || ((sq2 === 2) && (sq5 === 2) && (sq8 === 2))) {
     ended = true;
     winc = true;
     if (sq2 === 1 && sq5 === 1 && sq8 === 1) {
@@ -326,7 +330,8 @@ function draw() {
       wino = true;
     }
     line(800,280,800,620);
-  } else if (((sq3 === 1) && (sq6 === 1) && (sq9 === 1)) || ((sq3 === 2) && (sq6 === 2) && (sq9 === 2))) {
+  } // else
+  if (((sq3 === 1) && (sq6 === 1) && (sq9 === 1)) || ((sq3 === 2) && (sq6 === 2) && (sq9 === 2))) {
     ended = true;
     winc = true;
     if (sq1 === 3 && sq2 === 6 && sq3 === 9) {
@@ -335,7 +340,8 @@ function draw() {
       wino = true;
     }
     line(930,280,930,620);
-  } else if (((sq3 === 1) && (sq5 === 1) && (sq7 === 1)) || ((sq3 === 2) && (sq5 === 2) && (sq7 === 2))) {
+  } // else
+  if (((sq3 === 1) && (sq5 === 1) && (sq7 === 1)) || ((sq3 === 2) && (sq5 === 2) && (sq7 === 2))) {
     ended = true;
     winc = true;
     if (sq3 === 1 && sq5 === 1 && sq7 === 1) {
@@ -344,7 +350,8 @@ function draw() {
       wino = true;
     }
     line(970,280,630,620);
-  } else if (((sq1 === 1) && (sq5 === 1) && (sq9 === 1)) || ((sq1 === 2) && (sq5 === 2) && (sq9 === 2))) {
+  } // else
+  if (((sq1 === 1) && (sq5 === 1) && (sq9 === 1)) || ((sq1 === 2) && (sq5 === 2) && (sq9 === 2))) {
     ended = true;
     winc = true;
     if (sq1 === 1 && sq5 === 1 && sq9 === 1) {
@@ -353,7 +360,8 @@ function draw() {
       wino = true;
     }
     line(630,280,970,620);
-  } else if (sq1 != 0 && sq2 != 0 && sq3 != 0 && sq4 != 0 && sq5 != 0 && sq6 != 0 && sq7 != 0 && sq8 != 0 && sq9 != 0) {
+  } // else
+  if (sq1 != 0 && sq2 != 0 && sq3 != 0 && sq4 != 0 && sq5 != 0 && sq6 != 0 && sq7 != 0 && sq8 != 0 && sq9 != 0) {
     ended = true;
   }
   if (winc === true && exec === false) {
@@ -397,6 +405,12 @@ function draw() {
   rect(menu.x,menu.y,400,400)
   fill(0,0,0,100);
   rect(menu.x,menu.y,100,400);
+  fill(255);
+  stroke(200);
+  square(menu.x+120,menu.y+20,80,20);
+  fill(60);
+  stroke(30);
+  square(menu.x+220,menu.y+20,80,20);
 
   // debug-menu
   if (debugActive === true) { // debug-menu. op d drukken op het keyboard activeert 'm. 
@@ -430,13 +444,13 @@ function mouseClicked() {
     menuAct = true;
     p5.tween.manager
     .addTween(menu, 'myTween')
-    .addMotion('x', 1200, 2000, 'easeInElastic') 
+    .addMotion('x', 1200, 1500, 'easeInOutQuad') 
     .startTween();
   } else if (menuAct === true && mouseX >= 1200 && mouseY >= 250 && mouseY <= 650 && mouseX <= 1300) {
     menuAct = false;
     p5.tween.manager
     .addTween(menu, 'myTween')
-    .addMotion('x', 1500, 2000, 'easeInElastic') 
+    .addMotion('x', 1500, 1500, 'easeInOutQuad') 
     .startTween();
   }
   if (ended === false) {
