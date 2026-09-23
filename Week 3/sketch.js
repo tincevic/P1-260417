@@ -1,4 +1,6 @@
 let img;
+let img2;
+let img3;
 let xo;
 let startxo;
 let debugActive = false;
@@ -22,10 +24,15 @@ let winc;
 let winx;
 let wino;
 let exec = false;
+let menu = {x:1500,y:250};
+let menuAct = false;
+let colPlr1;
+let colPlr2;
 
 function preload() {
   img = loadImage('/../Assets/hout.jpg'); // hout textuur laden
   img2 = loadImage('/../Assets/houtach.jpg'); // hout 2
+  img3 = loadImage('/../Assets/hout.jpg'); // hout 3
   sound = loadSound('/../Assets/ostaris.mp3'); // muziekje
   chalk = loadSound('/../Assets/chalk.mp3'); // geluid
   win = loadSound('/../Assets/win.mp3'); // geluid
@@ -41,6 +48,11 @@ function setup() {
   mG2.fill(255);
   mG2.noStroke();
   mG2.rect(0,0,1600,900);
+  mG3 = createGraphics(1200,1200);
+  mG3.fill(255);
+  mG3.noStroke();
+  mG3.square(800,250,400);
+  img3.mask(mG3);
   img2.mask(mG2);
   img.mask(maskGraphics);
   startxo = 1;
@@ -49,6 +61,8 @@ function setup() {
   winc = false;
   winx = false;
   wino = false;
+  colPlr1 = color(255);
+  colPlr2 = color(60);
 }
 
 function draw() {
@@ -154,9 +168,9 @@ function draw() {
     textStyle(BOLD);
     angleMode(DEGREES);
     rotate(15);
-    fill(180,180,180,220);
+    fill(50,50,50,220);
     text("X",15,0)
-    fill(230,230,230,230);
+    fill(colPlr1,230);
     text("X",0,0);
     pop();
   } else if (xo === 2) {
@@ -170,92 +184,92 @@ function draw() {
     rotate(15);
     fill(50,50,50,220);
     text("O",15,0)
-    fill(20,20,20,230);
+    fill(colPlr2,230);
     text("O",0,0);
     pop();
   }
   stroke(255); // X en O tekenen
   strokeWeight(5);
   if (sq1 === 1) {
-    stroke(255);
+    stroke(colPlr1);
     line(630,280,710,360);
     line(710,280,630,360);
   } else if (sq1 === 2) {
-    stroke(60);
+    stroke(colPlr2);
     fill(30,30,30,80);
     circle(670,320,90);
   }
   if (sq2 === 1) {
-    stroke(255);
+    stroke(colPlr1);
     line(760,280,840,360);
     line(840,280,760,360);
   } else if (sq2 === 2) {
-    stroke(60);
+    stroke(colPlr2);
     fill(30,30,30,80);
     circle(800,320,90);
   }
   if (sq3 === 1) { 
-    stroke(255);
+    stroke(colPlr1);
     line(890,280,970,360);
     line(970,280,890,360);
   } else if (sq3 === 2) {
-    stroke(60);
+    stroke(colPlr2);
     fill(30,30,30,80);
     circle(930,320,90);
   }
   
   if (sq4 === 1) {
-    stroke(255);
+    stroke(colPlr1);
     line(630,410,710,490);
     line(710,410,630,490);
   } else if (sq4 === 2) {
-    stroke(60);
+    stroke(colPlr2);
     fill(30,30,30,80);
     circle(670,450,90);
   }
   if (sq5 === 1) {
-    stroke(255);
+    stroke(colPlr1);
     line(760,410,840,490);
     line(840,410,760,490);
   } else if (sq5 === 2) {
-    stroke(60);
+    stroke(colPlr2);
     fill(30,30,30,80);
     circle(800,450,90);
   }
   if (sq6 === 1) {
-    stroke(255);
+    stroke(colPlr1);
     line(890,410,970,490);
     line(970,410,890,490);
   } else if (sq6 === 2) {
-    stroke(60);
+    stroke(colPlr2);
     fill(30,30,30,80);
     circle(930,450,90);
   }
 
   if (sq7 === 1) {
-    stroke(255);
+    stroke(colPlr1);
     line(630,540,710,620);
     line(710,540,630,620);
   } else if (sq7 === 2) {
-    stroke(60);
+    stroke(colPlr2);
     fill(30,30,30,80);
     circle(670,580,90);
   }
   if (sq8 === 1) {
-    stroke(255);
+    stroke(colPlr1);
     line(760,540,840,620);
     line(840,540,760,620);
   } else if (sq8 === 2) {
-    stroke(60);
+    stroke(colPlr2);
     fill(30,30,30,80);
     circle(800,580,90);
   }
   if (sq9 === 1) {
-    stroke(255);
+    stroke(colPlr1);
     line(890,540,970,620);
     line(970,540,890,620);
   } else if (sq9 === 2) {
-    stroke(60);
+    stroke(colPlr2);
     fill(30,30,30,80);
     circle(930,580,90);
   }
@@ -375,6 +389,15 @@ function draw() {
     text("Draw!",775,175);
   }
 
+  // kleur veranderen
+  image(img3,menu.x-800,0);
+  stroke(69,33,4);
+  strokeWeight(7.5);
+  fill(0,0);
+  rect(menu.x,menu.y,400,400)
+  fill(0,0,0,100);
+  rect(menu.x,menu.y,100,400);
+
   // debug-menu
   if (debugActive === true) { // debug-menu. op d drukken op het keyboard activeert 'm. 
     textSize(20);
@@ -387,7 +410,8 @@ function draw() {
     text("vierkanten: "+sq1+","+sq2+","+sq3+","+sq4+","+sq5+","+sq6+","+sq7+","+sq8+","+sq9,10,60)
     text("beurt begin: "+startxo,10,80);
     text("win x: "+winx,10,100);
-    text("win o: "+wino,10,120);
+    text("win 3o: "+wino,10,120);
+    text("menu actief: "+menuAct,10,140);
   }
 }
 
@@ -402,6 +426,19 @@ function keyPressed() {
 }   
 
 function mouseClicked() {
+  if (menuAct === false && mouseX >= 1500 && mouseY >= 250 && mouseY <= 650) {
+    menuAct = true;
+    p5.tween.manager
+    .addTween(menu, 'myTween')
+    .addMotion('x', 1200, 2000, 'easeInElastic') 
+    .startTween();
+  } else if (menuAct === true && mouseX >= 1200 && mouseY >= 250 && mouseY <= 650 && mouseX <= 1300) {
+    menuAct = false;
+    p5.tween.manager
+    .addTween(menu, 'myTween')
+    .addMotion('x', 1500, 2000, 'easeInElastic') 
+    .startTween();
+  }
   if (ended === false) {
   if ((((mouseX >= 615 && mouseY >= 265) && (mouseX <= 725 && mouseY <= 375)) && sq1 === 0) && started === true) {
     chalk.play();
@@ -435,7 +472,7 @@ function mouseClicked() {
     } else {
       xo = 2;
     }
-  } else if ((((mouseX >= 745 && mouseY >= 265) && (mouseX <= 855 && mouseY <= 505)) && sq5 === 0) && started === true) {
+  } else if ((((mouseX >= 745 && mouseY >= 395) && (mouseX <= 855 && mouseY <= 505)) && sq5 === 0) && started === true) {
     chalk.play();
     sq5 = xo;
     if (xo === 2) {
@@ -443,7 +480,7 @@ function mouseClicked() {
     } else {
       xo = 2;
     }
-  } else if ((((mouseX >= 875 && mouseY >= 265) && (mouseX <= 985 && mouseY <= 505)) && sq6 === 0) && started === true) {
+  } else if ((((mouseX >= 875 && mouseY >= 395) && (mouseX <= 985 && mouseY <= 505)) && sq6 === 0) && started === true) {
     chalk.play();
     sq6 = xo;
     if (xo === 2) {
