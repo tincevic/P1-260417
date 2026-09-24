@@ -1,7 +1,7 @@
 let img;
 let img2;
 let img3;
-let XO;
+let xo;
 let startXO;
 let debugActive = false;
 let sound;
@@ -24,7 +24,7 @@ let winC;
 let winX;
 let winO;
 let exec = false;
-let menu = {x:1500,y:250}; // coördinaten kleurenmenu
+let menu = {x:1510,y:250}; // coördinaten kleurenmenu
 let menuAct = false;
 let colPlr1;
 let colPlr2;
@@ -59,7 +59,7 @@ function setup() {
   img2.mask(mG2);
   img.mask(maskGraphics);
   startXO = 1;
-  XO = 1; // 1 = x, 2 = o
+  xo = 1; // 1 = x, 2 = o
   sound.setVolume(0.4);
   winC = false;
   winX = false;
@@ -152,18 +152,18 @@ function draw() {
     } else if (ended === true) {
       text("Play!",740,817.5);
       if (startXO === 1 && nsdet === false) {
-        XO = 2;
+        xo = 2;
         startXO = 2;
         nsdet = true;
       } else if (startXO === 2 && nsdet === false) {
-        XO = 1;
+        xo = 1;
         startXO = 1;
         nsdet = true;
       }
     }
   }
   if (started === true) {
-  if (XO === 1) {
+  if (xo === 1) {
     noStroke();
     push();
     translate(100,600);
@@ -177,7 +177,7 @@ function draw() {
     fill(color(colPlr1),230);
     text("X",0,0);
     pop();
-  } else if (XO === 2) {
+  } else if (xo === 2) {
     noStroke();
     push();
     translate(100,600);
@@ -411,7 +411,7 @@ function draw() {
   // kleur veranderen
   image(img3,menu.x-800,0);
   stroke(69,33,4);
-  strokeWeight(7.5);
+  strokeWeight(5);
   fill(0,0);
   rect(menu.x,menu.y,400,400)
   fill(0,0,0,100);
@@ -420,7 +420,7 @@ function draw() {
   stroke(200);
   square(menu.x+100,menu.y+20,80,20);
   if (IDplr1 === 1) {
-    strokeWeight(10);
+    strokeWeight(5);
     fill(0,80);
     stroke(20);
     square(menu.x+100,menu.y+20,80,20);
@@ -429,7 +429,7 @@ function draw() {
     line(menu.x+120,menu.y+40,menu.x+160,menu.y+80);
     line(menu.x+160,menu.y+40,menu.x+120,menu.y+80);
   } else if (IDplr2 === 1) {
-    strokeWeight(10);
+    strokeWeight(5);
     fill(0,80);
     stroke(20);
     square(menu.x+100,menu.y+20,80,20);
@@ -438,11 +438,12 @@ function draw() {
     fill(0,0);
     circle(menu.x+140,menu.y+60,45);
   }
+  strokeWeight(5);
   fill(60); // zwart
   stroke(30);
   square(menu.x+200,menu.y+20,80,20);
   if (IDplr1 === 2) {
-    strokeWeight(10);
+    strokeWeight(5);
     fill(255,80);
     stroke(220);
     square(menu.x+200,menu.y+20,80,20);
@@ -451,7 +452,7 @@ function draw() {
     line(menu.x+220,menu.y+40,menu.x+260,menu.y+80);
     line(menu.x+260,menu.y+40,menu.x+220,menu.y+80);
   } else if (IDplr2 === 2) {
-    strokeWeight(10);
+    strokeWeight(5);
     fill(255,80);
     stroke(220);
     square(menu.x+200,menu.y+20,80,20);
@@ -460,11 +461,12 @@ function draw() {
     fill(0,0);
     circle(menu.x+240,menu.y+60,45);
   }
+  strokeWeight(5);
   fill(200,20,20); // rood
   stroke(170,10,10);
   square(menu.x+300,menu.y+20,80,20);
   if (IDplr1 === 3) {
-    strokeWeight(10);
+    strokeWeight(5);
     fill(0,80);
     stroke(20);
     square(menu.x+300,menu.y+20,80,20);
@@ -473,7 +475,7 @@ function draw() {
     line(menu.x+320,menu.y+40,menu.x+360,menu.y+80);
     line(menu.x+360,menu.y+40,menu.x+320,menu.y+80);
   } else if (IDplr2 === 3) {
-    strokeWeight(10);
+    strokeWeight(5);
     fill(0,80);
     stroke(20);
     square(menu.x+300,menu.y+20,80,20);
@@ -482,11 +484,12 @@ function draw() {
     fill(0,0);
     circle(menu.x+340,menu.y+60,45);
   }
+  strokeWeight(5);
   fill(20,20,200); // blauw
   stroke(10,10,170);
   square(menu.x+100,menu.y+120,80,20);
   if (IDplr1 === 4) {
-    strokeWeight(10);
+    strokeWeight(5);
     fill(0,80);
     stroke(20);
     square(menu.x+100,menu.y+120,80,20);
@@ -495,7 +498,7 @@ function draw() {
     line(menu.x+120,menu.y+140,menu.x+160,menu.y+180);
     line(menu.x+160,menu.y+140,menu.x+120,menu.y+180);
   } else if (IDplr2 === 4) {
-    strokeWeight(10);
+    strokeWeight(5);
     fill(0,80);
     stroke(20);
     square(menu.x+100,menu.y+120,80,20);
@@ -504,11 +507,12 @@ function draw() {
     fill(0,0);
     circle(menu.x+140,menu.y+160,45);
   }
+  strokeWeight(5);
   fill(20,200,20); // groen
   stroke(10,170,10);
   square(menu.x+200,menu.y+120,80,20);
   if (IDplr1 === 5) {
-    strokeWeight(10);
+    strokeWeight(5);
     fill(0,80);
     stroke(20);
     square(menu.x+200,menu.y+120,80,20);
@@ -517,7 +521,7 @@ function draw() {
     line(menu.x+220,menu.y+140,menu.x+260,menu.y+180);
     line(menu.x+260,menu.y+140,menu.x+220,menu.y+180);
   } else if (IDplr2 === 5) {
-    strokeWeight(10);
+    strokeWeight(5);
     fill(0,80);
     stroke(20);
     square(menu.x+200,menu.y+120,80,20);
@@ -526,11 +530,12 @@ function draw() {
     fill(0,0);
     circle(menu.x+240,menu.y+160,45);
   }
+  strokeWeight(5);
   fill(200,200,20); // geel
   stroke(170,170,10);
   square(menu.x+300,menu.y+120,80,20);
   if (IDplr1 === 6) {
-    strokeWeight(10);
+    strokeWeight(5);
     fill(0,80);
     stroke(20);
     square(menu.x+300,menu.y+120,80,20);
@@ -539,7 +544,7 @@ function draw() {
     line(menu.x+320,menu.y+140,menu.x+360,menu.y+180);
     line(menu.x+360,menu.y+140,menu.x+320,menu.y+180);
   } else if (IDplr2 === 6) {
-    strokeWeight(10);
+    strokeWeight(5);
     fill(0,80);
     stroke(20);
     square(menu.x+300,menu.y+120,80,20);
@@ -548,11 +553,12 @@ function draw() {
     fill(0,0);
     circle(menu.x+340,menu.y+160,45);
   }
+  strokeWeight(5);
   fill(230,160,20); // oranje
   stroke(185,120,10);
   square(menu.x+150,menu.y+220,80,20);
   if (IDplr1 === 7) {
-    strokeWeight(10);
+    strokeWeight(5);
     fill(0,80);
     stroke(20);
     square(menu.x+150,menu.y+220,80,20);
@@ -561,7 +567,7 @@ function draw() {
     line(menu.x+170,menu.y+240,menu.x+210,menu.y+280);
     line(menu.x+210,menu.y+240,menu.x+170,menu.y+280);
   } else if (IDplr2 === 7) {
-    strokeWeight(10);
+    strokeWeight(5);
     fill(0,80);
     stroke(20);
     square(menu.x+150,menu.y+220,80,20);
@@ -570,11 +576,12 @@ function draw() {
     fill(0,0);
     circle(menu.x+190,menu.y+260,45);
   }
-  fill(200,20,200); // paars
+  strokeWeight(5);
+  fill(180,40,180); // paars
   stroke(170,10,170);
   square(menu.x+250,menu.y+220,80,20);
   if (IDplr1 === 8) {
-    strokeWeight(10);
+    strokeWeight(5);
     fill(0,80);
     stroke(20);
     square(menu.x+250,menu.y+220,80,20);
@@ -583,7 +590,7 @@ function draw() {
     line(menu.x+270,menu.y+240,menu.x+310,menu.y+280);
     line(menu.x+310,menu.y+240,menu.x+270,menu.y+280);
   } else if (IDplr2 === 8) {
-    strokeWeight(10);
+    strokeWeight(5);
     fill(0,80);
     stroke(20);
     square(menu.x+250,menu.y+220,80,20);
@@ -626,7 +633,7 @@ function draw() {
     textFont("Arial");
     text("welcome 2 the dawn debug menu",10,20);
     rect(142.5,12.5,53,2.5);
-    text("beurt: "+XO,10,40);
+    text("beurt: "+xo,10,40);
     text("vierkanten: "+sq1+","+sq2+","+sq3+","+sq4+","+sq5+","+sq6+","+sq7+","+sq8+","+sq9,10,60)
     text("beurt begin: "+startXO,10,80);
     text("win x: "+winX,10,100);
@@ -646,7 +653,7 @@ function keyPressed() {
 }   
 
 function mouseClicked() {
-  if (menuAct === false && mouseX >= 1500 && mouseY >= 250 && mouseY <= 650) {
+  if (menuAct === false && mouseX >= 1510 && mouseY >= 250 && mouseY <= 650) {
     menuAct = true;
     p5.tween.manager
     .addTween(menu, 'myTween')
@@ -656,7 +663,7 @@ function mouseClicked() {
     menuAct = false;
     p5.tween.manager
     .addTween(menu, 'myTween')
-    .addMotion('x', 1500, 1500, 'easeInOutQuad') 
+    .addMotion('x', 1510, 1500, 'easeInOutQuad') 
     .startTween();
   }
   if (menuAct === true) {
@@ -727,10 +734,10 @@ function mouseClicked() {
       }
     } else if (mouseX >= menu.x+250 && mouseX <= menu.x+330 && mouseY >= menu.y+220 && mouseY <= menu.y+300) {
       if (selection === 1 && IDplr2 !== 8) {
-        colPlr1 = color(200,20,200);
+        colPlr1 = color(180,40,180);
         IDplr1 = 8;
       } else if (selection === 2 && IDplr1 !== 8) {
-        colPlr2 = color(200,20,200);
+        colPlr2 = color(180,40,180);
         IDplr2 = 8;
       }
     }
@@ -738,75 +745,75 @@ function mouseClicked() {
   if (ended === false) {
   if ((((mouseX >= 615 && mouseY >= 265) && (mouseX <= 725 && mouseY <= 375)) && sq1 === 0) && started === true) {
     chalk.play();
-    sq1 = XO;
-    if (XO === 2) {
-      XO = 1;
+    sq1 = xo;
+    if (xo === 2) {
+      xo = 1;
     } else {
-      XO = 2;
+      xo = 2;
     }
   } else if ((((mouseX >= 745 && mouseY >= 265) && (mouseX <= 855 && mouseY <= 375)) && sq2 === 0) && started === true) {
     chalk.play();
-    sq2 = XO;
-    if (XO === 2) {
-      XO = 1;
+    sq2 = xo;
+    if (xo === 2) {
+      xo = 1;
     } else {
-      XO = 2;
+      xo = 2;
     }
   } else if ((((mouseX >= 875 && mouseY >= 265) && (mouseX <= 985 && mouseY <= 375)) && sq3 === 0) && started === true) {
     chalk.play();
-    sq3 = XO;
-    if (XO === 2) {
-      XO = 1;
+    sq3 = xo;
+    if (xo === 2) {
+      xo = 1;
     } else {
-      XO = 2;
+      xo = 2;
     }
   } else if ((((mouseX >= 615 && mouseY >= 395) && (mouseX <= 725 && mouseY <= 505)) && sq4 === 0) && started === true) {
     chalk.play();
-    sq4 = XO;
-    if (XO === 2) {
-      XO = 1;
+    sq4 = xo;
+    if (xo === 2) {
+      xo = 1;
     } else {
-      XO = 2;
+      xo = 2;
     }
   } else if ((((mouseX >= 745 && mouseY >= 395) && (mouseX <= 855 && mouseY <= 505)) && sq5 === 0) && started === true) {
     chalk.play();
-    sq5 = XO;
-    if (XO === 2) {
-      XO = 1;
+    sq5 = xo;
+    if (xo === 2) {
+      xo = 1;
     } else {
-      XO = 2;
+      xo = 2;
     }
   } else if ((((mouseX >= 875 && mouseY >= 395) && (mouseX <= 985 && mouseY <= 505)) && sq6 === 0) && started === true) {
     chalk.play();
-    sq6 = XO;
-    if (XO === 2) {
-      XO = 1;
+    sq6 = xo;
+    if (xo === 2) {
+      xo = 1;
     } else {
-      XO = 2;
+      xo = 2;
     }
   } else if ((((mouseX >= 615 && mouseY >= 525) && (mouseX <= 725 && mouseY <= 635)) && sq7 === 0) && started === true) {
     chalk.play();
-    sq7 = XO;
-    if (XO === 2) {
-      XO = 1;
+    sq7 = xo;
+    if (xo === 2) {
+      xo = 1;
     } else {
-      XO = 2;
+      xo = 2;
     }
   } else if ((((mouseX >= 745 && mouseY >= 525) && (mouseX <= 855 && mouseY <= 635)) && sq8 === 0) && started === true) {
     chalk.play();
-    sq8 = XO;
-    if (XO === 2) {
-      XO = 1;
+    sq8 = xo;
+    if (xo === 2) {
+      xo = 1;
     } else {
-      XO = 2;
+      xo = 2;
     }
   } else if ((((mouseX >= 875 && mouseY >= 525) && (mouseX <= 985 && mouseY <= 635)) && sq9 === 0) && started === true) {
     chalk.play();
-    sq9 = XO;
-    if (XO === 2) {
-      XO = 1;
+    sq9 = xo;
+    if (xo === 2) {
+      xo = 1;
     } else {
-      XO = 2;
+      xo = 2;
     }
   }
   }
