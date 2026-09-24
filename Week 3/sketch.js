@@ -24,11 +24,11 @@ let winC;
 let winX;
 let winO;
 let exec = false;
-let menu = {x:1500,y:250};
+let menu = {x:1500,y:250}; // coördinaten kleurenmenu
 let menuAct = false;
 let colPlr1;
 let colPlr2;
-let IDplr1 = 1;
+let IDplr1 = 1; // kleur-ID
 let IDplr2 = 2;
 let selection;
 
