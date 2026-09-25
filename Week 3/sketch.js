@@ -13,7 +13,7 @@ let maskGraphics;
 let mG2;
 let mG3;
 
-// real shit!
+// real shit!!
 let xo; // 1 is X, 2 is O
 let startXO; // who starts next round?
 let debugActive = false; // debug menu
