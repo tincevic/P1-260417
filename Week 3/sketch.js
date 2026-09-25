@@ -261,6 +261,10 @@ function draw() {
   rect(menu.x,menu.y,400,400)
   fill(0,0,0,100);
   rect(menu.x,menu.y,80,400);
+
+  // unfinished funct here!
+  // fill(a);
+  // stroke(b,c,d)
   fill(255); // white
   stroke(200);
   square(menu.x+100,menu.y+20,80,20);
