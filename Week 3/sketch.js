@@ -57,7 +57,7 @@ function preload() {
 function setup() {
   createCanvas(1600,900);
   
-  maskGraphics = createGraphics(1200,1200);
+  maskGraphics = createGraphics(1200,1200); // everything from here until img.mask(maskGraphics); is for graphics creation (a.k.a. placing images of the wood)
   maskGraphics.fill(255);
   maskGraphics.noStroke();
   maskGraphics.square(600,250,400,20);
@@ -72,24 +72,24 @@ function setup() {
   img3.mask(mG3);
   img2.mask(mG2);
   img.mask(maskGraphics);
-  startXO = 1;
+  startXO = 1; // who starts?
   xo = 1; // 1 = x, 2 = o
-  chalk.setVolume(0.3);
-  music.setVolume(0.4);
-  winC = false;
+  chalk.setVolume(0.3); // too loud
+  music.setVolume(0.3); // too loud
+  winC = false; // nobody's winning on move 0
   winX = false;
   winO = false;
-  colPlr1 = color(255);
-  colPlr2 = color(60);
+  colPlr1 = color(255); // default. can be changed
+  colPlr2 = color(60); // default. can be changed
   selection = 1;
 }
 
 function draw() {
-  image(img2,0,0);
-  background(0,70);
+  image(img2,0,0); // background
+  background(0,70); // darker!
   noStroke();
 
-  // coffee
+  // coffee - random extra
   fill(0,100);
   circle(1215,390,250);
   rect(1200,200,30,100,5);
@@ -110,7 +110,7 @@ function draw() {
   strokeWeight(4);
   
   // hover
-  checkHover(615,265,725,375,sq1); // repetitive, in other function
+  checkHover(615,265,725,375,sq1); // repetitive, in other function. basically, if your mouse is above the coordinates of the box, the box becomes a bit darker.
   checkHover(745,265,855,375,sq2);
   checkHover(875,265,985,375,sq3);
   checkHover(615,395,725,505,sq4);
@@ -122,16 +122,16 @@ function draw() {
 
   noStroke();
   fill(180,180,0,120);
-  circle(865,385,10);
+  circle(865,385,10); // ✨ flair
   circle(735,385,10);
   circle(865,515,10);
   circle(735,515,10);
   fill(0,0,0,120);
 
-  // watch-a out-a for the-a spaghetti 🤌🤌🤌
+  // watch-a out-a for the-a spaghetti
 
   // start button
-  if (!started || ended) {
+  if (!started || ended) { // start button, if game isn't ongoing
     rect(500,750,600,100,20);
     fill(255);
     textSize(50);
@@ -184,9 +184,7 @@ function draw() {
       pop();
     }
 
-  stroke(255); // draw X and O
-  strokeWeight(5);
-  drawCnShape(sq1,630,280); // repetitive; moved to other function
+  drawCnShape(sq1,630,280); // repetitive; moved to other function. this draws a shape associated with who selects which box.
   drawCnShape(sq2,760,280);
   drawCnShape(sq3,890,280);
   drawCnShape(sq4,630,410);
@@ -200,7 +198,7 @@ function draw() {
     text("ERROR!",800,850); // this will likely never be activated but just in case...
   }
 
-  // check if someone has won. defined in other function
+  // check if someone has won by checking specific selected boxes. it is done this way because standard tic tac toe only has 8 ways to win. defined in other function
   checkWin(sq1,sq2,sq3,625,320,975,320);
   checkWin(sq4,sq5,sq6,625,450,975,450);
   checkWin(sq7,sq8,sq9,625,580,975,580);
@@ -209,12 +207,12 @@ function draw() {
   checkWin(sq3,sq6,sq9,930,280,930,620);
   checkWin(sq3,sq5,sq7,970,280,630,620);
   checkWin(sq1,sq5,sq9,630,280,970,620);
-  if (sq1 !== 0 && sq2 !== 0 && sq3 !== 0 && sq4 !== 0 && sq5 !== 0 && sq6 !== 0 && sq7 !== 0 && sq8 !== 0 && sq9 !== 0) {
+  if (sq1 !== 0 && sq2 !== 0 && sq3 !== 0 && sq4 !== 0 && sq5 !== 0 && sq6 !== 0 && sq7 !== 0 && sq8 !== 0 && sq9 !== 0) { // check for draw
     ended = true;
   }
   if (winC && !winProc) { // has someone won?
     win.setVolume(3);
-    win.play();
+    win.play(); // only non-copyrighted piece of this project
     if (winX) {
       xScore += 1;
       winX = false;
@@ -229,21 +227,21 @@ function draw() {
   stroke(200);
   strokeWeight(5);
   textSize(50);
-  textFont("Monospace");
+  textFont("Monospace"); // don't need to shuffle coordinates
   fill(colPlr1);
-  text("x "+xScore,678,220);
+  text("x "+xScore,678,220); // shows colour of X and their score
   fill(255);
-  text(" : ",758,220);
+  text(" : ",758,220); // divider
   fill(colPlr2);
-  text(oScore+" o",838,220);
+  text(oScore+" o",838,220); // shows colour of O and their score
   textSize(20);
   stroke(200);
   strokeWeight(2);
-  if (!winC && started && !ended) {
+  if (!winC && started && !ended) { // checks if the game is ongoing or who has won
     fill(255);
     text("Ongoing...",750,175);
   } else if (winO) {
-    fill(colPlr2);
+    fill(colPlr2); 
     text("O wins!",765,175);
   } else if (winX) {
     fill(colPlr1);
@@ -253,7 +251,7 @@ function draw() {
     text("Draw!",775,175);
   }
 
-  // change colour
+  // colour selection
   image(img3,menu.x-800,0);
   stroke(69,33,4);
   strokeWeight(5);
@@ -261,194 +259,16 @@ function draw() {
   rect(menu.x,menu.y,400,400)
   fill(0,0,0,100);
   rect(menu.x,menu.y,80,400);
+  drawClrSelect(255,255,255,200,200,200,100,20,1); // white
+  drawClrSelect(60,60,60,30,30,30,200,20,2); // black
+  drawClrSelect(180,20,20,170,10,10,300,20,3); // red
+  drawClrSelect(20,20,180,10,10,170,100,120,4); // blue
+  drawClrSelect(20,180,20,10,170,10,200,120,5); // green
+  drawClrSelect(180,180,20,170,170,10,300,120,6); // yellow
+  drawClrSelect(230,160,20,185,120,10,150,220,7); // orange
+  drawClrSelect(180,40,180,170,10,170,250,220,8); // purple
 
-  // unfinished funct here!
-  // fill(a);
-  // stroke(b,c,d)
-  fill(255); // white
-  stroke(200);
-  square(menu.x+100,menu.y+20,80,20);
-  if (IDplr1 === 1) {
-    strokeWeight(5);
-    fill(0,80);
-    stroke(20);
-    square(menu.x+100,menu.y+20,80,20);
-    strokeWeight(7.5);
-    stroke(255);
-    line(menu.x+120,menu.y+40,menu.x+160,menu.y+80);
-    line(menu.x+160,menu.y+40,menu.x+120,menu.y+80);
-  } else if (IDplr2 === 1) {
-    strokeWeight(5);
-    fill(0,80);
-    stroke(20);
-    square(menu.x+100,menu.y+20,80,20);
-    strokeWeight(7.5);
-    stroke(255);
-    fill(0,0);
-    circle(menu.x+140,menu.y+60,45);
-  }
-  strokeWeight(5);
-  fill(60); // black
-  stroke(30);
-  square(menu.x+200,menu.y+20,80,20);
-  if (IDplr1 === 2) {
-    strokeWeight(5);
-    fill(255,80);
-    stroke(220);
-    square(menu.x+200,menu.y+20,80,20);
-    strokeWeight(7.5);
-    stroke(255);
-    line(menu.x+220,menu.y+40,menu.x+260,menu.y+80);
-    line(menu.x+260,menu.y+40,menu.x+220,menu.y+80);
-  } else if (IDplr2 === 2) {
-    strokeWeight(5);
-    fill(255,80);
-    stroke(220);
-    square(menu.x+200,menu.y+20,80,20);
-    strokeWeight(7.5);
-    stroke(255);
-    fill(0,0);
-    circle(menu.x+240,menu.y+60,45);
-  }
-  strokeWeight(5);
-  fill(180,20,20); // red
-  stroke(170,10,10);
-  square(menu.x+300,menu.y+20,80,20);
-  if (IDplr1 === 3) {
-    strokeWeight(5);
-    fill(0,80);
-    stroke(20);
-    square(menu.x+300,menu.y+20,80,20);
-    strokeWeight(7.5);
-    stroke(255);
-    line(menu.x+320,menu.y+40,menu.x+360,menu.y+80);
-    line(menu.x+360,menu.y+40,menu.x+320,menu.y+80);
-  } else if (IDplr2 === 3) {
-    strokeWeight(5);
-    fill(0,80);
-    stroke(20);
-    square(menu.x+300,menu.y+20,80,20);
-    strokeWeight(7.5);
-    stroke(255);
-    fill(0,0);
-    circle(menu.x+340,menu.y+60,45);
-  }
-  strokeWeight(5);
-  fill(20,20,180); // blue
-  stroke(10,10,170);
-  square(menu.x+100,menu.y+120,80,20);
-  if (IDplr1 === 4) {
-    strokeWeight(5);
-    fill(0,80);
-    stroke(20);
-    square(menu.x+100,menu.y+120,80,20);
-    strokeWeight(7.5);
-    stroke(255);
-    line(menu.x+120,menu.y+140,menu.x+160,menu.y+180);
-    line(menu.x+160,menu.y+140,menu.x+120,menu.y+180);
-  } else if (IDplr2 === 4) {
-    strokeWeight(5);
-    fill(0,80);
-    stroke(20);
-    square(menu.x+100,menu.y+120,80,20);
-    strokeWeight(7.5);
-    stroke(255);
-    fill(0,0);
-    circle(menu.x+140,menu.y+160,45);
-  }
-  strokeWeight(5);
-  fill(20,180,20); // green
-  stroke(10,170,10);
-  square(menu.x+200,menu.y+120,80,20);
-  if (IDplr1 === 5) {
-    strokeWeight(5);
-    fill(0,80);
-    stroke(20);
-    square(menu.x+200,menu.y+120,80,20);
-    strokeWeight(7.5);
-    stroke(255);
-    line(menu.x+220,menu.y+140,menu.x+260,menu.y+180);
-    line(menu.x+260,menu.y+140,menu.x+220,menu.y+180);
-  } else if (IDplr2 === 5) {
-    strokeWeight(5);
-    fill(0,80);
-    stroke(20);
-    square(menu.x+200,menu.y+120,80,20);
-    strokeWeight(7.5);
-    stroke(255);
-    fill(0,0);
-    circle(menu.x+240,menu.y+160,45);
-  }
-  strokeWeight(5);
-  fill(180,180,20); // yellow
-  stroke(170,170,10);
-  square(menu.x+300,menu.y+120,80,20);
-  if (IDplr1 === 6) {
-    strokeWeight(5);
-    fill(0,80);
-    stroke(20);
-    square(menu.x+300,menu.y+120,80,20);
-    strokeWeight(7.5);
-    stroke(255);
-    line(menu.x+320,menu.y+140,menu.x+360,menu.y+180);
-    line(menu.x+360,menu.y+140,menu.x+320,menu.y+180);
-  } else if (IDplr2 === 6) {
-    strokeWeight(5);
-    fill(0,80);
-    stroke(20);
-    square(menu.x+300,menu.y+120,80,20);
-    strokeWeight(7.5);
-    stroke(255);
-    fill(0,0);
-    circle(menu.x+340,menu.y+160,45);
-  }
-  strokeWeight(5);
-  fill(230,160,20); // orange
-  stroke(185,120,10);
-  square(menu.x+150,menu.y+220,80,20);
-  if (IDplr1 === 7) {
-    strokeWeight(5);
-    fill(0,80);
-    stroke(20);
-    square(menu.x+150,menu.y+220,80,20);
-    strokeWeight(7.5);
-    stroke(255);
-    line(menu.x+170,menu.y+240,menu.x+210,menu.y+280);
-    line(menu.x+210,menu.y+240,menu.x+170,menu.y+280);
-  } else if (IDplr2 === 7) {
-    strokeWeight(5);
-    fill(0,80);
-    stroke(20);
-    square(menu.x+150,menu.y+220,80,20);
-    strokeWeight(7.5);
-    stroke(255);
-    fill(0,0);
-    circle(menu.x+190,menu.y+260,45);
-  }
-  strokeWeight(5);
-  fill(180,40,180); // purple
-  stroke(170,10,170);
-  square(menu.x+250,menu.y+220,80,20);
-  if (IDplr1 === 8) {
-    strokeWeight(5);
-    fill(0,80);
-    stroke(20);
-    square(menu.x+250,menu.y+220,80,20);
-    strokeWeight(7.5);
-    stroke(255);
-    line(menu.x+270,menu.y+240,menu.x+310,menu.y+280);
-    line(menu.x+310,menu.y+240,menu.x+270,menu.y+280);
-  } else if (IDplr2 === 8) {
-    strokeWeight(5);
-    fill(0,80);
-    stroke(20);
-    square(menu.x+250,menu.y+220,80,20);
-    strokeWeight(7.5);
-    stroke(255);
-    fill(0,0);
-    circle(menu.x+290,menu.y+260,45);
-  }
-  if (selection === 1) {
+  if (selection === 1) { // is X changing their colour? highlight if yes
     stroke(255);
     strokeWeight(12.5);
   } else {
@@ -457,7 +277,7 @@ function draw() {
   }
   line(menu.x+180,menu.y+350,menu.x+200,menu.y+370);
   line(menu.x+200,menu.y+350,menu.x+180,menu.y+370);
-  if (selection === 2) {
+  if (selection === 2) { // is O changing their colour? highlight if yes
     stroke(255);
     strokeWeight(12.5);
   } else {
@@ -466,15 +286,15 @@ function draw() {
   }
   fill(0,0);
   circle(menu.x+290,menu.y+360,30);
-  if (colPlr1.toString() === colPlr2.toString()) {
-    if (colPlr2.toString() == color(60).toString()) {
+  if (colPlr1.toString() === colPlr2.toString()) { // do both players use the same colour? reset one if yes
+    if (colPlr2.toString() == color(60).toString()) { // is black the selected colour? use white instead if yes
       colPlr2 = color(255);
     } else {
       colPlr2 = color(60);
     }
   }
 
-  if (debugActive) { // debug menu. activated by pressing d on the keyboard
+  if (debugActive) { // debug menu. activated by pressing d on the keyboard. no practical use for player
     textSize(20);
     fill(255);
     noStroke();
@@ -491,7 +311,7 @@ function draw() {
 }
 
 function keyPressed() {
-  if (key === 'd') {
+  if (key === 'd') { // open debug menu
     if (!debugActive) {
       debugActive = true;
     } else {
@@ -501,21 +321,21 @@ function keyPressed() {
 }   
 
 function mouseClicked() {
-  if (!menuAct && mouseX >= 1510 && mouseY >= 250 && mouseY <= 650) {
+  if (!menuAct && mouseX >= 1510 && mouseY >= 250 && mouseY <= 650) { // open colour menu
     menuAct = true;
     p5.tween.manager
-    .addTween(menu, 'myTween')
-    .addMotion('x', 1200, 1500, 'easeInOutQuad') 
+    .addTween(menu,'myTween')
+    .addMotion('x',1200,1500,'easeInOutQuad') 
     .startTween();
-  } else if (menuAct && mouseX >= 1200 && mouseY >= 250 && mouseY <= 650 && mouseX <= 1300) {
+  } else if (menuAct && mouseX >= 1200 && mouseY >= 250 && mouseY <= 650 && mouseX <= 1300) { // close colour menu
     menuAct = false;
     p5.tween.manager
-    .addTween(menu, 'myTween')
-    .addMotion('x', 1510, 1500, 'easeInOutQuad') 
+    .addTween(menu,'myTween')
+    .addMotion('x',1510,1500,'easeInOutQuad') 
     .startTween();
   }
   if (menuAct) {
-    if ((mouseX >= menu.x+180 && mouseY >= menu.y+350) && (mouseX <= menu.x+200 && mouseY <= menu.y+370)) {
+    if ((mouseX >= menu.x+180 && mouseY >= menu.y+350) && (mouseX <= menu.x+200 && mouseY <= menu.y+370)) { // switch who changes colours
       if (selection !== 1) {
         selection = 1;
       }
@@ -524,112 +344,30 @@ function mouseClicked() {
         selection = 2;
       }
     }
-    if (mouseX >= menu.x+100 && mouseX <= menu.x+180 && mouseY >= menu.y+20 && mouseY <= menu.y+100) {
-      if (selection === 1 && IDplr2 !== 1) {
-        colPlr1 = color(255);
-        IDplr1 = 1;
-      } else if (selection === 2 && IDplr1 !== 1) {
-        colPlr2 = color(255);
-        IDplr2 = 1;
-      }
-    } else if (mouseX >= menu.x+200 && mouseX <= menu.x+280 && mouseY >= menu.y+20 && mouseY <= menu.y+100) {
-      if (selection === 1 && IDplr2 !== 2) {
-        colPlr1 = color(60);
-        IDplr1 = 2;
-      } else if (selection === 2 && IDplr1 !== 2) {
-        colPlr2 = color(60);
-        IDplr2 = 2;
-      }
-    } else if (mouseX >= menu.x+300 && mouseX <= menu.x+380 && mouseY >= menu.y+20 && mouseY <= menu.y+100) {
-      if (selection === 1 && IDplr2 !== 3) {
-        colPlr1 = color(180,20,20);
-        IDplr1 = 3;
-      } else if (selection === 2 && IDplr1 !== 3) {
-        colPlr2 = color(180,20,20);
-        IDplr2 = 3;
-      }
-    } else if (mouseX >= menu.x+100 && mouseX <= menu.x+180 && mouseY >= menu.y+120 && mouseY <= menu.y+200) {
-      if (selection === 1 && IDplr2 !== 4) {
-        colPlr1 = color(20,20,180);
-        IDplr1 = 4;
-      } else if (selection === 2 && IDplr1 !== 4) {
-        colPlr2 = color(20,20,180);
-        IDplr2 = 4;
-      }
-    } else if (mouseX >= menu.x+200 && mouseX <= menu.x+280 && mouseY >= menu.y+120 && mouseY <= menu.y+200) {
-      if (selection === 1 && IDplr2 !== 5) {
-        colPlr1 = color(20,180,20);
-        IDplr1 = 5;
-      } else if (selection === 2 && IDplr1 !== 5) {
-        colPlr2 = color(20,180,20);
-        IDplr2 = 5;
-      }
-    } else if (mouseX >= menu.x+300 && mouseX <= menu.x+380 && mouseY >= menu.y+120 && mouseY <= menu.y+200) {
-      if (selection === 1 && IDplr2 !== 6) {
-        colPlr1 = color(180,180,20);
-        IDplr1 = 6;
-      } else if (selection === 2 && IDplr1 !== 6) {
-        colPlr2 = color(180,180,20);
-        IDplr2 = 6;
-      }
-    } else if (mouseX >= menu.x+150 && mouseX <= menu.x+230 && mouseY >= menu.y+220 && mouseY <= menu.y+300) {
-      if (selection === 1 && IDplr2 !== 7) {
-        colPlr1 = color(230,160,20);
-        IDplr1 = 7;
-      } else if (selection === 2 && IDplr1 !== 7) {
-        colPlr2 = color(230,160,20);
-        IDplr2 = 7;
-      }
-    } else if (mouseX >= menu.x+250 && mouseX <= menu.x+330 && mouseY >= menu.y+220 && mouseY <= menu.y+300) {
-      if (selection === 1 && IDplr2 !== 8) {
-        colPlr1 = color(180,40,180);
-        IDplr1 = 8;
-      } else if (selection === 2 && IDplr1 !== 8) {
-        colPlr2 = color(180,40,180);
-        IDplr2 = 8;
-      }
-    }
+    // colour selection 2: electric boogaloo
+    setColor(100,180,20,100,1,255,255,255);
+    setColor(200,280,20,100,2,60,60,60);
+    setColor(300,380,20,100,3,180,20,20);
+    setColor(100,180,120,200,4,20,20,180);
+    setColor(200,280,120,200,5,20,180,20);
+    setColor(300,380,120,200,6,180,180,20);
+    setColor(150,230,220,300,7,230,160,20);
+    setColor(250,330,220,300,8,180,40,180);
   }
+
   if (!ended) {
-  if ((((mouseX >= 615 && mouseY >= 265) && (mouseX <= 725 && mouseY <= 375)) && sq1 === 0) && started) {
-    chalk.play();
-    sq1 = xo;
-    changeTurn();
-  } else if ((((mouseX >= 745 && mouseY >= 265) && (mouseX <= 855 && mouseY <= 375)) && sq2 === 0) && started) {
-    chalk.play();
-    sq2 = xo;
-    changeTurn();
-  } else if ((((mouseX >= 875 && mouseY >= 265) && (mouseX <= 985 && mouseY <= 375)) && sq3 === 0) && started) {
-    chalk.play();
-    sq3 = xo;
-    changeTurn();
-  } else if ((((mouseX >= 615 && mouseY >= 395) && (mouseX <= 725 && mouseY <= 505)) && sq4 === 0) && started) {
-    chalk.play();
-    sq4 = xo;
-    changeTurn();
-  } else if ((((mouseX >= 745 && mouseY >= 395) && (mouseX <= 855 && mouseY <= 505)) && sq5 === 0) && started) {
-    chalk.play();
-    sq5 = xo;
-    changeTurn();
-  } else if ((((mouseX >= 875 && mouseY >= 395) && (mouseX <= 985 && mouseY <= 505)) && sq6 === 0) && started) {
-    chalk.play();
-    sq6 = xo;
-    changeTurn();
-  } else if ((((mouseX >= 615 && mouseY >= 525) && (mouseX <= 725 && mouseY <= 635)) && sq7 === 0) && started) {
-    chalk.play();
-    sq7 = xo;
-    changeTurn();
-  } else if ((((mouseX >= 745 && mouseY >= 525) && (mouseX <= 855 && mouseY <= 635)) && sq8 === 0) && started) {
-    chalk.play();
-    sq8 = xo;
-    changeTurn();
-  } else if ((((mouseX >= 875 && mouseY >= 525) && (mouseX <= 985 && mouseY <= 635)) && sq9 === 0) && started) {
-    chalk.play();
-    sq9 = xo;
-    changeTurn();
+    // place symbol if box selected
+    sq1 = beginDraw(615,265,725,375,sq1);
+    sq2 = beginDraw(745,265,855,375,sq2);
+    sq3 = beginDraw(875,265,985,375,sq3);
+    sq4 = beginDraw(615,395,725,505,sq4);
+    sq5 = beginDraw(745,395,855,505,sq5);
+    sq6 = beginDraw(875,395,985,505,sq6);
+    sq7 = beginDraw(615,525,725,635,sq7);
+    sq8 = beginDraw(745,525,855,635,sq8);
+    sq9 = beginDraw(875,525,985,635,sq9);
   }
-  }
-  if (((mouseX >= 500 && mouseY >= 750) && (mouseX <= 1100 && mouseY <= 850)) && (started === false || ended)) {
+  if (((mouseX >= 500 && mouseY >= 750) && (mouseX <= 1100 && mouseY <= 850)) && (started === false || ended)) { // start game
     if (started === false) {
     userStartAudio();
     music.loop();
@@ -642,15 +380,16 @@ function mouseClicked() {
   }
 }
 
+
 function changeTurn() {
-  if (xo === 2) {
+  if (xo === 2) { // simple turn switching
       xo = 1;
     } else {
       xo = 2;
     }
 }
 
-function resetBoard() {
+function resetBoard() { // reset board when game (re)starting
   sq1 = 0;
   sq2 = 0;
   sq3 = 0;
@@ -666,7 +405,7 @@ function resetBoard() {
   winProc = false;
 }
 
-function checkWin(a,b,c,d,e,f,g) {
+function checkWin(a,b,c,d,e,f,g) { // check for win condition
   if (((a === 1) && (b === 1) && (c === 1))) { // a, b, and c are the squares defined in draw();
     ended = true;
     winC = true;
@@ -697,14 +436,61 @@ function checkHover(a,b,c,d,e) { // a,b,c,d are coordinates of the box, e is the
   square(a,b,110,20);
 }
 
-function drawCnShape(a,b,c) { // a is the square ID, b and c are the starting coordinates of the shape (X or O)
+function drawCnShape(a,b,c) { // draw certain shape. a is to signify X or O, b and c are the starting coordinates of the shape
   if (a === 1) { // draw X
-    stroke(color(colPlr1));
+    stroke(color(colPlr1)); // set the shape's colour to the player-selected colour.
     line(b,c,b+80,c+80);
     line(b+80,c,b,c+80);
   } else if (a === 2) { // draw O
-    stroke(color(colPlr2));
+    stroke(color(colPlr2)); // set the shape's colour to the player-selected colour.
     fill(30,30,30,80);
     circle(b+40,c+40,90);
   }
+}
+
+function drawClrSelect(a,b,c,d,e,f,g,h,i) { // colour selection 3: it's free
+  fill(a,b,c);
+  stroke(d,e,f);
+  strokeWeight(5);
+  square(menu.x+g,menu.y+h,80,20);
+  if (IDplr1 === i) {
+    strokeWeight(5);
+    fill(0,80);
+    stroke(20);
+    square(menu.x+g,menu.y+h,80,20);
+    strokeWeight(7.5);
+    stroke(255);
+    line(menu.x+g+20,menu.y+h+20,menu.x+g+60,menu.y+h+60);
+    line(menu.x+g+60,menu.y+h+20,menu.x+g+20,menu.y+h+60);
+  } else if (IDplr2 === i) {
+    strokeWeight(5);
+    fill(0,80);
+    stroke(20);
+    square(menu.x+g,menu.y+h,80,20);
+    strokeWeight(7.5);
+    stroke(255);
+    circle(menu.x+g+40,menu.y+h+40,45);
+  }
+}
+
+function setColor(a,b,c,d,e,f,g,h) { // set player colour
+  if (mouseX >= menu.x+a && mouseX <= menu.x+b && mouseY >= menu.y+c && mouseY <= menu.y+d) {
+      if (selection === 1 && IDplr2 !== e) {
+        colPlr1 = color(f,g,h);
+        IDplr1 = e;
+      } else if (selection === 2 && IDplr1 !== e) {
+        colPlr2 = color(f,g,h);
+        IDplr2 = e;
+      }
+    }
+}
+
+function beginDraw(a,b,c,d,e) { // place symbol on selecte box
+  if ((((mouseX >= a && mouseY >= b) && (mouseX <= c && mouseY <= d)) && e === 0) && started) {
+    chalk.play();
+    let placedSymbol = xo;
+    changeTurn();
+    return placedSymbol;
+  }
+  return e;
 }
