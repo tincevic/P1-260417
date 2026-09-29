@@ -35,7 +35,7 @@ function draw() {
   background(220);
 
   fill(0);
-  textSize(12);
+  textSize(10);
   textStyle(BOLD);
   text("1.",20,15);
   text("2.",20,100);
@@ -114,11 +114,11 @@ function draw() {
     } else if (coloursARR[i] == "yellow") {
       fill(255,255,0);
     }
-    text(coloursARR[i],130,190+i*10);
+    text(coloursARR[i],135,190+i*10);
   }
   for (let i = 0; i < 5; i++) {
     fill(randCLRS[i]);
-    square(130+i*30,280,30)
+    square(135+i*30,280,30)
   }
   fill(0);
   textSize(10);
