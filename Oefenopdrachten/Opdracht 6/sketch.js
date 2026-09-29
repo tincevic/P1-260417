@@ -35,6 +35,7 @@ function draw() {
   background(220);
 
   fill(0);
+  textSize(12);
   textStyle(BOLD);
   text("1.",20,15);
   text("2.",20,100);
