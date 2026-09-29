@@ -5,10 +5,16 @@ let arr2;
 let word;
 let letters;
 let amountE;
+let randCLRS;
+let randNMBS;
+let comb;
+let avg;
 
 function setup() {
   colours = [color(255,0,0),color(0,255,0),color(0,0,255),color(255,0,255),color(255,255,0)];
   coloursARR = ["red", "green", "blue", "purple", "yellow"];
+  randCLRS = [color(round(random(255)),round(random(255)),round(random(255))),color(round(random(255)),round(random(255)),round(random(255))),color(round(random(255)),round(random(255)),round(random(255))),color(round(random(255)),round(random(255)),round(random(255))),color(round(random(255)),round(random(255)),round(random(255)))];
+  randNMBS = [round(random(100)),round(random(100)),round(random(100)),round(random(100)),round(random(100)),round(random(100)),round(random(100)),round(random(100)),round(random(100)),round(random(100)),round(random(100)),round(random(100))]
   nums = [400, 240, 10, 490, 30, 60, 244, 500, 301, 300];
   arr1 = [3, 55, 93, 20, 102, 6];
   arr2 = [14, 22, 80, 5];
@@ -21,6 +27,8 @@ function setup() {
       amountE++;
     }
   }
+  comb = randNMBS.reduce(getSum);
+  avg = round((comb / 12));
 }
 
 function draw() {
@@ -93,7 +101,6 @@ function draw() {
   textSize(10);
 
   coloursARR.sort();
-  hog = 0;
   for (let i = 0; i < 10; i++) {
     if (coloursARR[i] == "red") {
       fill(255,0,0);
@@ -106,7 +113,25 @@ function draw() {
     } else if (coloursARR[i] == "yellow") {
       fill(255,255,0);
     }
-    text(coloursARR[i],130,190+hog);
-    hog += 10;
+    text(coloursARR[i],130,190+i*10);
   }
+  for (let i = 0; i < 5; i++) {
+    fill(randCLRS[i]);
+    square(130+i*30,280,30)
+  }
+  fill(0);
+  textSize(10);
+  textStyle(BOLD);
+  randNMBS.sort();
+  for (let i = 0; i < 12; i++) {
+    text(randNMBS[i],255,15+i*10);
+    if (i == 11) { // bolden voorkomen
+    text("totaal: "+comb,255,145);
+    text("gem: "+avg,255,155);
+    }
+  }
+}
+
+function getSum(total,num) {
+    return total + num;
 }
