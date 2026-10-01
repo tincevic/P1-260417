@@ -146,7 +146,7 @@ function keyPressed() {
 function drawShape(shape,size,colour,letterSlc) { // draw selected shape. letterSlc is reserved for the "letter" shape.
   if (shape === "triangle") {
     fill(colour);
-    triangle(0,-size,-size, size,size,size); // simple triangle function. could use the polygon math but this is much easier!
+    triangle(0,-size,-size,size,size,size); // simple triangle function. could use the polygon math but this is much easier!
   }
   if (shape === "diamond") {
     fill(colour);
