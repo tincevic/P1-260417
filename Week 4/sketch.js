@@ -83,7 +83,7 @@ function draw() {
     
     rotation = rotation+rotationSpeed; // makes the shape spin
     if (state === "initial") { // initial state
-      size = size+1+PI/10; // increase size per frame
+      size += 1+PI/10; // increase size per frame
       if (size >= 20) { // max size?
         size = 20; // properly setting
         state = "peak"; // enter new state
@@ -91,14 +91,14 @@ function draw() {
     }
     if (state === "peak") {
       size = 20+level*50
-      life = life-1; // lifespan while largest
+      life--; // lifespan while largest
       if (life <= 0) { // is peak lifespan over?
         life = 0; // properly setting
         state = "removal";
       }
     }
     if (state === "removal") {
-      size = size - 1; // decrease size per frame
+      size--; // decrease size per frame
       if (size <= 0) { // is it practically gone?
         size = 0; // properly setting
         state = "gone"; // trigger actual removal of shape clone to prevent memory leakage
