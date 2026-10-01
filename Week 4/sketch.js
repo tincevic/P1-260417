@@ -12,7 +12,7 @@ let greenArray;
 let blueArray;
 let purpleArray;
 let graysArray;
-let clrSelect = 5; // which colour is selected?
+let clrSelect = 6; // which colour is selected?
 // coordinates
 let mX1;
 let mY1;
@@ -38,7 +38,7 @@ function setup() {
   purpleArray = [color(200,30,200), color(255,0,255), color(255,67,255), color(255,180,255), color(160,20,160), color(90,0,90), color(160,60,160)];
   graysArray = [color(200), color(255), color(67), color(180), color(120), color(90), color(140)];
   colourArrays = [redArray, orangeArray, yellowArray, greenArray, blueArray, purpleArray, graysArray]; // collection of arrays. palette of colours is determined with clrSelect and the exact colour used within that palette is random
-  alphabet = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ superfunkycalifragisexy"; // list of letters
+  alphabet = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ superfunkycalifragisexy!"; // list of letters
   letter = alphabet.split(""); // split each individual letter and put it into an array
   background(0);
   sound.stop(); // make sure sound doesn't play until canvas is clicked
@@ -126,6 +126,7 @@ function draw() {
 } 
 function mouseClicked() {
   if (act != 1) { // trigger sound
+    stroke(80);
     sound.loop();
     act = 1;
   }
