@@ -43,14 +43,14 @@ function draw() {
   }
   if (phase == "out") {
     rn -= 0.05;
-    if (rn <= 2) {
+    if (rn <= 0) {
       phase = "in";
     }
   }
 }
 
 function keyPressed() {
-  if (key === 'd') {
+  if (keyCode == 8) {
     if (selChoice == 3) {
       selChoice = 0;
     } else {
