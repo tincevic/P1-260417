@@ -142,12 +142,12 @@ function draw() {
   fill(60,5,70);
   rect(0,0,1200,100);
   image(assetL,10,10,85,85);
+  image(pattern,0,100,1920,1280);
   if (!started) {
     fill(220);
     textFont("Bahnschrift");
     text("Welcome to the Quiz!",600,70);
     tint(255,180);
-    image(pattern,0,100,1920,1280);
     textFont("Bahnschrift");
     textSize(60);
     fill(60,5,70);
