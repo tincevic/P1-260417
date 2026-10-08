@@ -122,7 +122,7 @@ function preload() {
   assetL = loadImage('/../Assets/prince quiz.png'); // logo
   suessfont = loadFont('/../Assets/SuessFont.ttf'); // font
   symbols = loadFont('/../Assets/Prince.otf'); // font
-  collage = loadImage('/../Assets/pcollage.png') // collage for menu
+  pattern = loadImage('/../Assets/ppattern.png') // pattern for menu
 }
 
 function setup() {
@@ -130,42 +130,54 @@ function setup() {
   opened = false;
   started = false;
   bgm.setVolume(0.1);
+  bgm.amp(1);
   questionsAnswers = [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, q13, q14, q15];
   // I did not use HTML buttons for this quiz since they do not match the overall aesthetic of the project. Using the same methods as in previous projects, I will create custom buttons.
 }
 
 function draw() {
+  textFont("Bahnschrift");
   fill(255);
   background(220);
   fill(60,5,70);
   rect(0,0,1200,100);
   image(assetL,10,10,85,85);
-  textFont("Bahnschrift");
-  textSize(60);
-  fill(60,5,70);
-  textStyle(BOLD);
-  text("THE PRINCE QUIZ",50,200);
-  textStyle(NORMAL);
-  textSize(30);
-  text("Welcome to the Prince quiz! There are 15 questions about Prince's music and life. \nYou have 15 seconds to answer each question. \nDo you wish to begin?",50,250)
-  rect(50,350,200,100,20);
-  textSize(60);
-  fill(220);
-  text("Welcome to the Quiz!",600,70);
-  textFont(symbols);
-  text("c",120,430);
-  image(collage,550,400,810,951);
+  if (!started) {
+    fill(220);
+    textFont("Bahnschrift");
+    text("Welcome to the Quiz!",600,70);
+    tint(255,180);
+    image(pattern,0,100,1920,1280);
+    textFont("Bahnschrift");
+    textSize(60);
+    fill(60,5,70);
+    textStyle(BOLD);
+    text("THE PRINCE QUIZ",50,200);
+    textStyle(NORMAL);
+    textSize(30);
+    text("Welcome to the Prince quiz! There are 15 questions about Prince's music and life. \nYou have 15 seconds to answer each question. \nDo you wish to begin?",50,250)
+    rect(50,350,200,100,20);
+    textSize(15);
+    fill(30);
+    textFont("Bahnschrift");
+    text("Tin Martinčević, 2026",10,790);
+    fill(220);
+    textSize(60);
+    textFont(symbols);
+    text("c",120,430);
+  }
+  
   if (!opened) {
     background(0);
+    fill(255,180)
+    circle(mouseX,mouseY,70);
     textSize(50);
     fill(120,20,120);
     textFont(suessfont);
     text("Click anywhere to enter the quiz", 300, 400);
-    fill(255,180)
-    circle(mouseX,mouseY,70);
   } 
   if (started) {
-    bgm.amp(0.02, 1.0); 
+    bgm.amp(0.1, 1.0); 
   }
 
 }
@@ -173,10 +185,9 @@ function draw() {
 function mouseClicked() {
   if (!opened) {
     opened = true;
-    // bgm.loop();
-  }
-  if (opened && !started) {
-    if (mouseX > 500 && mouseX < 700 && mouseY > 350 && mouseY < 450) {
+    bgm.loop();
+  } else if (!started) {
+    if (mouseX > 50 && mouseX < 250 && mouseY > 350 && mouseY < 450) {
       started = true;
     }
   }
