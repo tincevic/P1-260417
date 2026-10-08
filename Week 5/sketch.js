@@ -143,6 +143,7 @@ function draw() {
   rect(0,0,1200,100);
   image(assetL,10,10,85,85);
   image(pattern,0,100,1920,1280);
+  textAlign(LEFT,BASELINE);
   if (!started) {
     fill(220);
     textFont("Bahnschrift");
@@ -174,7 +175,9 @@ function draw() {
     textSize(50);
     fill(120,20,120);
     textFont(suessfont);
-    text("Click anywhere to enter the quiz", 300, 400);
+    textAlign(CENTER, CENTER);
+    text("click anywhere 2 enter the quiz\nexperience", width/2, height/2);
+    textAlign(LEFT,BASELINE);
   } 
   if (started) {
     bgm.amp(0.1, 1.0); 

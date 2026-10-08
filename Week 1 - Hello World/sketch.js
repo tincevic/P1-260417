@@ -22,7 +22,7 @@ function setup() {
   background(225);
   ffont = loadFont("/../Assets/Bulga.otf"); 
   sfont = loadFont("/../Assets/Prince.otf");
-  cfont = loadFont("/../Assets/Compacta Bold.otf");
+  cfont = loadFont("/../Assets/Comp.otf");
   tfont = loadFont("/../Assets/TGB.ttf");
   // kleur om doorzichtigheid van huis te laten zien
   noStroke();
