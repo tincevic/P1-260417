@@ -3,76 +3,91 @@ let q1 = {
   question: "Which album did this song appear on?", // Let's Go Crazy | Purple Rain
   choices: ["Around The World in a Day", "Parade", "Purple Rain", "Sign O' the Times"],
   correctAnswer: 2,
+  qType: 1, // mult choice
 }
 let q2 = {
   question: "Which of these people never worked with Prince?", // David Bowie
   choices: ["David Bowie", "Chaka Khan", "Sheila E.", "Madonna"],
   correctAnswer: 0,
+  qType: 1,
 }
 let q3 = {
   question: "When did Prince change his name to an unpronounceable symbol?", // 1993
   choices: ["1993", "1989", "1996", "2001"],
   correctAnswer: 0,
+  qType: 1,
 }
 let q4 = {
   question: "What album is this song from?", // Sign O' the Times
   choices: ["Purple Rain", "Sign O' the Times", "Batman", "The Beautiful Ones"],
   correctAnswer: 1,
+  qType: 1,
 }
 let q5 = {
   question: "In what year was this Prince   album released?", // LoveSexy - TIMELINE
   choices: ["1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990"],
   correctAnswer: 8,
+  qType: 2, // timeline
 }
 let q6 = {
   question: "In which country did Prince never perform?", // Minnesota - MAP
   choices: ["U.S.A.", "Ireland", "Yugoslavia", "Italy", "Russia/USSR", "France"],
   correctAnswer: 2,
+  qType: 3, // map
 }
 let q7 = {
   question: "Which month is mentioned in this song?", // Sometimes It Snows in April
   choices: ["March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
   correctAnswer: 1,
+  qType: 2, // timeline
 }
 let q8 = {
   question: "Which famous city is mentioned in this song?", // It's Gonna Be A Beautiful Night | Paris
   choices: ["London", "Paris", "Los Angeles", "Minneapolis"],  
   correctAnswer: 1,
+  qType: 1,
 }
 let q9 = {
   question: "True or False: Love Song is a duet with Prince and Madonna.", // True
   choices: ["True", "False"],
   correctAnswer: 0,
+  qType: 4, // true false
 }
 let q10 = {
   question: "Who is featured on this song?", // U Got the Look | Sheena Easton
   choices: ["Madonna", "Sheena Easton", "Cyndi Lauper", "Whitney Houston"],
   correctAnswer: 1,
+  qType: 1,
 }
 let q11 = {
   question: "Which artist recorded this song written by Prince?", // Nothing Compares 2 U | Sinéad O'Connor
   choices: ["Sinéad O'Connor", "Tom Jones", "Madonna", "Beyonce"],
   correctAnswer: 0,
+  qType: 1,
 }
 let q12 = {
   question: "Which band recorded this song written by Prince?", // Manic Monday | The Bangles
   choices: ["Madness", "The Go-Go's", "The Bangles", "Heart"],
   correctAnswer: 2,
+  qType: 1,
 }
 let q13 = {
   question: "Which '90s album by Prince, then known as the Artist, is this song from?", // Gold | The Gold Experience
   choices: ["Rave Un2 the Joy Fantastic", "Come", "The Gold Experience", "Emancipation"],
   correctAnswer: 2,
+  qType: 1,
 }
 let q14 = {
   question: "True or False: The soundtrack to Tim Burton's Batman was primarily recorded by Prince.", // True
   choices: ["True", "False"],
   correctAnswer: 0,
+  qType: 1,
 }
 let q15 = {
   question: "True or False: Prince died in 2016.", // True
   choices: ["True", "False"],
   correctAnswer: 0,
+  qType: 1,
 }
 
 // per-question assets
@@ -92,6 +107,7 @@ let assetQ15; // image
 let bgm; // background music
 let assetL; // logo
 let suessfont; // font
+let currentQ; // current question
 
 // image graphics
 
@@ -132,6 +148,7 @@ function setup() {
   bgm.setVolume(0.1);
   bgm.amp(1);
   questionsAnswers = [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, q13, q14, q15];
+  currentQ = random(questionsAnswers);
   // I did not use HTML buttons for this quiz since they do not match the overall aesthetic of the project. Using the same methods as in previous projects, I will create custom buttons.
 }
 
@@ -147,7 +164,7 @@ function draw() {
   if (!started) {
     fill(220);
     textFont("Bahnschrift");
-    text("Welcome to the Quiz!",600,70);
+    text("Welcome to the Quiz!",600,73);
     tint(255,180);
     textFont("Bahnschrift");
     textSize(60);
@@ -161,7 +178,7 @@ function draw() {
     textSize(15);
     fill(30);
     textFont("Bahnschrift");
-    text("Tin Martinčević, 2026",10,790);
+    text("Martinčević, 2026",10,790);
     fill(220);
     textSize(60);
     textFont(symbols);
@@ -180,7 +197,13 @@ function draw() {
     textAlign(LEFT,BASELINE);
   } 
   if (started) {
-    bgm.amp(0.1, 1.0); 
+    bgm.amp(0.1, 0.2); 
+    if (currentQ.qType == 1) {
+      textFont("Bahnschrift");
+      fill(0);
+      textSize(20);
+      text("Hey, what's up, this means it's working!!",100,100)
+    }
   }
 
 }
