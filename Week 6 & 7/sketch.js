@@ -54,6 +54,7 @@ function draw() {
       healthLevel = max(0, healthLevel-1)
     }
   }
+  text("reset variables",10,390); // debug only
 }
 
 function saveStats() {
@@ -63,6 +64,18 @@ function saveStats() {
   storeItem("cleanLevel", cleanLevel);
   storeItem("healthLevel", healthLevel);
   storeItem("weightLevel", weightLevel);
+}
+
+function mouseClicked() {
+  if (mouseX >= 10 && mouseX <= 85 && mouseY >= 385 && mouseY <= 395) { // debug only
+    hungerLevel = 100;
+    sleepLevel = 100;
+    funLevel = 100;
+    cleanLevel = 100;
+    healthLevel = 100;
+    weightLevel = 100;
+    saveStats();
+  }
 }
 
 function keyPressed() {
