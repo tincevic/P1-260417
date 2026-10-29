@@ -36,14 +36,15 @@ function setup() {
 }
 
 function draw() {
-  background(200);
+  background(180,210,190);
 
   fill(0,0);
-  stroke(180);
+  stroke(0,60);
   strokeWeight(3);
   circle(415,200,800);
   circle(-15,200,800);
 
+  noStroke();
   fill(0);
   if (debugActive) {
     text("hunger: "+hungerLevel,10,10);
@@ -81,14 +82,15 @@ function draw() {
   text("reset variables",10,390); // debug only
   text("mouseY: "+mouseY,10,380);
   text("mouseX: "+mouseX,10,370);
-  fill(220);
-  circle(60,300,50); // shop
+  noStroke();
+  fill(255,120);
+  circle(60,300,55); // shop
   circle(340,300,50); // clean
   circle(120,350,50); // food
   circle(280,350,50); // play
   circle(200,360,50); // medicine
 
-  stroke(0);
+  stroke(0); // shopping cart icon
   line(37,295,70,295);
   line(70,295,80,285);
   line(37,295,43,315);
@@ -97,6 +99,9 @@ function draw() {
   fill(0,0);
   circle(48,320,5);
   circle(64,320,5);
+
+  
+
   /*
   ideas for buttons
   (each button for a function opens a different menu that is laid over the screen)
