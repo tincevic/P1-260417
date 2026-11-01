@@ -154,14 +154,14 @@ let timeLimit = 15; // how much time does someone have to answer a question?
 let timeLeft = 15;
 
 function preload() { // load assets and set volume for songs
-  assetQ1 = loadSound('/../Assets/q1.mp3'); // music
-  assetQ4 = loadSound('/../Assets/q4.mp3'); // music
-  assetQ7 = loadSound('/../Assets/q7.mp3'); // music
-  assetQ8 = loadSound('/../Assets/q8.mp3'); // music
-  assetQ10 = loadSound('/../Assets/q10.mp3'); // music
-  assetQ11 = loadSound('/../Assets/q11.mp3'); // music
-  assetQ12 = loadSound('/../Assets/q12.mp3'); // music
-  assetQ13 = loadSound('/../Assets/q13.mp3'); // music
+  assetQ1 = loadSound('/../../repo/Assets/q1.mp3'); // music
+  assetQ4 = loadSound('/../../repo/Assets/q4.mp3'); // music
+  assetQ7 = loadSound('/../../repo/Assets/q7.mp3'); // music
+  assetQ8 = loadSound('/../../repo/Assets/q8.mp3'); // music
+  assetQ10 = loadSound('/../../repo/Assets/q10.mp3'); // music
+  assetQ11 = loadSound('/../../repo/Assets/q11.mp3'); // music
+  assetQ12 = loadSound('/../../repo/Assets/q12.mp3'); // music
+  assetQ13 = loadSound('/../../repo/Assets/q13.mp3'); // music
   assetQ1.setVolume(0.2);
   assetQ4.setVolume(0.2);
   assetQ7.setVolume(0.2);
@@ -171,18 +171,18 @@ function preload() { // load assets and set volume for songs
   assetQ12.setVolume(0.2);
   assetQ13.setVolume(0.2);
 
-  assetQ5 = loadImage('/../Assets/q5.jpg'); // image
-  mapQ6 = loadImage('/../Assets/q6.png'); // map
-  assetQ9 = loadImage('/../Assets/q9.png'); // image
-  assetQ14 = loadImage('/../Assets/q14.jpg'); // image
-  assetQ15 = loadImage('/../Assets/q15.png'); // image
+  assetQ5 = loadImage('/../../repo/Assets/q5.jpg'); // image
+  mapQ6 = loadImage('/../../repo/Assets/q6.png'); // map
+  assetQ9 = loadImage('/../../repo/Assets/q9.png'); // image
+  assetQ14 = loadImage('/../../repo/Assets/q14.jpg'); // image
+  assetQ15 = loadImage('/../../repo/Assets/q15.png'); // image
 
-  bgm = loadSound('/../Assets/bgmQuiz.mp3'); // background music
+  bgm = loadSound('/../../repo/Assets/bgmQuiz.mp3'); // background music
   bgm.setVolume(0.02);
-  assetL = loadImage('/../Assets/prince quiz.png'); // logo
-  suessfont = loadFont('/../Assets/SuessFont.ttf'); // font
-  symbols = loadFont('/../Assets/Prince.otf'); // font
-  pattern = loadImage('/../Assets/ppattern.png') // pattern for menu
+  assetL = loadImage('/../../repo/Assets/prince quiz.png'); // logo
+  suessfont = loadFont('/../../repo/Assets/SuessFont.ttf'); // font
+  symbols = loadFont('/../../repo/Assets/Prince.otf'); // font
+  pattern = loadImage('/../../essentials/assets/ppattern.png') // pattern for menu
 }
 
 function setup() {

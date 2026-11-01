@@ -27,10 +27,10 @@ let deathSoundPlayed = false;
 let dangerSoundPlayed = false;
 
 function preload() {
-  spritesheet = loadImage('/../Assets/spritesheet.png'); // stupid little seal
-  deathSound = loadSound('/../Assets/death.mp3'); // death sound
-  dangerSound = loadSound('/../Assets/danger.mp3'); // danger sound
-  pattern = loadImage('/../Assets/ppattern.png') // pattern for menu
+  spritesheet = loadImage('/../../essentials/assets/spritesheet.png'); // stupid little seal
+  deathSound = loadSound('/../../essentials/assets/death.mp3'); // death sound
+  dangerSound = loadSound('/../../essentials/assets/danger.mp3'); // danger sound
+  pattern = loadImage('/../../essentials/Assets/ppattern.png') // pattern for menu
 }
 
 function setup() {
@@ -277,7 +277,7 @@ function mouseClicked() {
   }
   if ((mouseX >= 10 && mouseX <= 85 && mouseY >= 385 && mouseY <= 395 && debugActive) || (mouseX >= 120 && mouseX <= 280 && mouseY >= 200 && mouseY <= 220 && !alive)) { // debug only. this resets stats when pressed
     hungerLevel = 100;
-    sleepLevel = 10;
+    sleepLevel = 100;
     funLevel = 50;
     cleanLevel = 100;
     healthLevel = 100;
