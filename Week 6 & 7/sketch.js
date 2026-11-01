@@ -12,6 +12,9 @@ let pills = 1;
 let toys = 1;
 let soaps = 1;
 
+let deathSound;
+let dangerSound;
+
 let spritesheet;
 let xSprite = 0;
 let ySprite = 0;
@@ -19,8 +22,15 @@ let ySprite = 0;
 let menuActive = false;
 let menuType = 0;
 
+let alive = true;
+let deathSoundPlayed = false;
+let dangerSoundPlayed = false;
+
 function preload() {
   spritesheet = loadImage('/../Assets/spritesheet.png'); // stupid little seal
+  deathSound = loadSound('/../Assets/death.mp3'); // death sound
+  dangerSound = loadSound('/../Assets/danger.mp3'); // danger sound
+  pattern = loadImage('/../Assets/ppattern.png') // pattern for menu
 }
 
 function setup() {
@@ -52,31 +62,44 @@ function draw() {
   strokeWeight(3);
   circle(415,200,800); // background
   circle(-15,200,800);
+  if (alive) {
+    if (frameCount % 120 == 0) { // lower stats every 2 seconds
+      hungerLevel = max(0, hungerLevel-1);
+      sleepLevel = max(0, sleepLevel-1);
+      funLevel = max(0, funLevel-0.5);
+      cleanLevel = max(0, cleanLevel-1);
+      updateSprite();
+      saveStats();
+    }
+    if (frameCount % 180 == 0) { // lower stats every 3 seconds
+      healthLevel = max(0, healthLevel-1);
+      weightLevel = max(0, weightLevel-1);
+    }
+    if (frameCount % 60 == 0) { // lower stats every second depending on other stats
+      if (hungerLevel == 0) {
+        healthLevel = max(0, healthLevel-1)
+      }
+      if (sleepLevel == 0) {
+        healthLevel = max(0, healthLevel-1)
+      }
+      if (funLevel == 0) {
+        healthLevel = max(0, healthLevel-0.5)
+      }
+      if (cleanLevel == 0) {
+        healthLevel = max(0, healthLevel-1)
+      }
+    }
 
-  if (frameCount % 120 == 0) { // lower stats every 2 seconds
-    hungerLevel = max(0, hungerLevel-1);
-    sleepLevel = max(0, sleepLevel-1);
-    funLevel = max(0, funLevel-0.5);
-    cleanLevel = max(0, cleanLevel-1);
-    updateSprite();
-    saveStats();
+    if (healthLevel <= 40 || weightLevel <= 30) { // if the pet is sick or underweight, play danger sound
+      danger();
+    }
+    if (frameCount % 600 == 0) { // every 10 seconds, add cash
+      cash += 20;
+    }
   }
-  if (frameCount % 180 == 0) { // lower stats every 3 seconds
-    healthLevel = max(0, cleanLevel-1);
-    weightLevel = max(0, cleanLevel-1);
-  }
-  if (frameCount % 60 == 0) { // lower stats every second depending on other stats
-    if (hungerLevel == 0) {
-      healthLevel = max(0, healthLevel-1)
-    }
-    if (sleepLevel == 0) {
-      healthLevel = max(0, healthLevel-1)
-    }
-    if (funLevel == 0) {
-      healthLevel = max(0, healthLevel-0.5)
-    }
-    if (cleanLevel == 0) {
-      healthLevel = max(0, healthLevel-1)
+  if (frameCount % 3600 == 0) { // every minute, 1/10 chance of pet becoming sick
+    if (random(0,10) < 1) {
+      healthLevel = 40;
     }
   }
   noStroke();
@@ -97,6 +120,7 @@ function draw() {
   circle(48,320,5);
   circle(64,320,5);
 
+  tint(255,255);
   updateSprite(); // add image of sprite. xSprite and ySprite are determined by variables, which show different sprites for different stats
   image(spritesheet,width/2,height/2,150,80,xSprite*72,ySprite*40,72,40);
   
@@ -132,6 +156,8 @@ function draw() {
     fill(0);
     textSize(15);
     text("X",385,15);
+    tint(255,100);
+    image(pattern,0,300,1920,1280);
     if (menuType == 1) { // shop menu. primitive, but works.
       textSize(20);
       text("Welcome to the Shop!",10,30);
@@ -140,12 +166,65 @@ function draw() {
       text("You can buy:",10,100);
       textSize(16);
       text("PIZZA - $10 (You own "+pizzas+")",10,120);
-      text("MEDICINAL PILLS - $10 (You own "+pills+")",10,140);
+      text("MEDICINE - $10 (You own "+pills+")",10,140);
       text("TOY - $20 (You own "+toys+")",10,160);
       text("SOAP - $5 (You own "+soaps+")",10,180);
+    } else if (menuType == 2) {
+      textSize(20);
+      text("Food Menu",10,30);
+      textSize(12);
+      text("You have: "+pizzas+" pizza(s)",10,50);
+      if (hungerLevel >= 80) {
+        text("Your pet isn't hungry!",10,65);
+      }
+      textSize(30);
+      text("Click HERE to feed your pet!",10,100);
+    } else if (menuType == 3) {
+      textSize(20);
+      text("Medicine Menu",10,30);
+      textSize(12);
+      text("You have: "+pills+" pill(s)",10,50);
+      if (healthLevel >= 80) {
+        text("Your pet is completely healthy!",10,65);
+      }
+      textSize(30);
+      text("Click HERE to heal your pet!",10,100);
+    } else if (menuType == 4) {
+      textSize(20);
+      text("Play Menu",10,30);
+      textSize(12);
+      text("You have: "+toys+" toy(s)",10,50);
+      if (funLevel >= 80) {
+        text("Your pet doesn't want to play!",10,65);
+      }
+      textSize(30);
+      text("Click HERE to play with \nyour pet!",10,100);
+    } else if (menuType == 5) {
+      textSize(20);
+      text("Clean Menu",10,30);
+      textSize(12);
+      text("You have: "+soaps+" soap(s)",10,50);
+      if (cleanLevel >= 80) {
+        text("Your pet isn't dirty!",10,65);
+      }
+      textSize(30);
+      text("Click HERE to clean \nyour pet!",10,100);
     }
   }
 
+  if (weightLevel <= 5 || healthLevel <= 0) { // if the pet dies, stop the game and offer the choice to reset
+    alive = false;
+    death();
+    saveStats();
+    noStroke();
+    fill(180,190,210);
+    square(0,0,400); // cover screen
+    fill(0);
+    textSize(30);
+    text("Your pet has died.",80,180);
+    textSize(20);
+    text("Restart the game",120,220);
+  }
   noStroke();
   fill(0);
   textSize(12);
@@ -157,14 +236,31 @@ function draw() {
     text("health: "+healthLevel,10,50);
     text("weight: "+weightLevel,10,60);
     text("menu active? "+menuActive,10,70);
+    text("reset variables",10,390); // resets stats when pressed
+    text("mouseY: "+mouseY,10,380);
+    text("mouseX: "+mouseX,10,370);
   }
-  text("reset variables",10,390); // debug only. resets stats when pressed
-  text("mouseY: "+mouseY,10,380); // debug only
-  text("mouseX: "+mouseX,10,370); // debug only
 }
 
 function mouseClicked() {
-  if (mouseX >= 10 && mouseX <= 85 && mouseY >= 385 && mouseY <= 395) { // debug only. this resets stats when pressed
+  if (mouseX >= 10 && mouseX <= 370 && mouseY >= 80 && mouseY <= 130) { // if you click on the menu, it checks what menu is open and if you have the item, it uses it and adds to the stat
+    if (menuType == 2 && pizzas > 0 && hungerLevel <= 80) {
+      pizzas--;
+      hungerLevel = min(hungerLevel+30, 100);
+      weightLevel = min(weightLevel+10, 200);
+    } else if (menuType == 3 && pills > 0 && healthLevel <= 80) {
+      pills--;
+      healthLevel = min(healthLevel+30, 100);
+    } else if (menuType == 4 && toys > 0 && funLevel <= 80) {
+      toys--;
+      funLevel = min(funLevel+40, 100);
+      cleanLevel = max(cleanLevel-10, 0);
+    } else if (menuType == 5 && soaps > 0 && cleanLevel <= 80) {
+      soaps--;
+      cleanLevel = min(cleanLevel+70, 100);
+    }
+  }
+  if ((mouseX >= 10 && mouseX <= 85 && mouseY >= 385 && mouseY <= 395 && debugActive) || (mouseX >= 120 && mouseX <= 280 && mouseY >= 200 && mouseY <= 220 && !alive)) { // debug only. this resets stats when pressed
     hungerLevel = 100;
     sleepLevel = 100;
     funLevel = 50;
@@ -172,12 +268,14 @@ function mouseClicked() {
     healthLevel = 100;
     weightLevel = 100;
     cash = 100;
-    pizzas = 1; 
+    pizzas = 1;
     pills = 1;
     toys = 1;
     soaps = 1;
     saveStats();
     updateSprite();
+    dangerSoundPlayed = false;
+    deathSoundPlayed = false;
   }
   if (!menuActive) {
   if (mouseX >= 33 && mouseX <= 87 && mouseY >= 273 && mouseY <= 327) { // shop menu
@@ -229,6 +327,20 @@ function keyPressed() { // opens debug menu
     } else {
       debugActive = false;
     }
+  }
+}
+
+function death() {
+  if (!deathSoundPlayed) {
+    deathSoundPlayed = true;
+    deathSound.play();
+  }
+}
+
+function danger() {
+  if (!dangerSoundPlayed) {
+    dangerSoundPlayed = true;
+    dangerSound.play();
   }
 }
 
