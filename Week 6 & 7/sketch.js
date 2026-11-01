@@ -124,12 +124,27 @@ function draw() {
   updateSprite(); // add image of sprite. xSprite and ySprite are determined by variables, which show different sprites for different stats
   image(spritesheet,width/2,height/2,150,80,xSprite*72,ySprite*40,72,40);
   
+  if (sleepLevel <= 20) { // Zzz icon
+    fill(0);
+    strokeWeight(1);
+    textSize(12);
+    text("Tip: If your pet isn't healthy, \nit can't sleep.",130,30)
+    textSize(20);
+    text("z",200,150);
+    text("z",210,140);
+    text("z",220,130);
+    strokeWeight(3);
+    if (healthLevel >= 70) {
+      sleepLevel = 90; // the pet will sleep automatically if it is healthy enough
+    }
+  }
+  fill(0,0);
+  stroke(0);
   triangle(110,330,143,345,115,372); // pizza-ish icon
   line(111,340,136,350);
   circle(115,350,5);
   circle(125,350,5);
   circle(123,360,5);
-
   rect(185,353,30,24,3); // medicine/pill bottle icon
   rect(191,345,18,8);
   rect(189,340,22,5);
@@ -262,7 +277,7 @@ function mouseClicked() {
   }
   if ((mouseX >= 10 && mouseX <= 85 && mouseY >= 385 && mouseY <= 395 && debugActive) || (mouseX >= 120 && mouseX <= 280 && mouseY >= 200 && mouseY <= 220 && !alive)) { // debug only. this resets stats when pressed
     hungerLevel = 100;
-    sleepLevel = 100;
+    sleepLevel = 10;
     funLevel = 50;
     cleanLevel = 100;
     healthLevel = 100;
