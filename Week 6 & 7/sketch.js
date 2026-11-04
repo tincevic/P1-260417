@@ -27,10 +27,10 @@ let deathSoundPlayed = false;
 let dangerSoundPlayed = false;
 
 function preload() {
-  spritesheet = loadImage('/../../essentials/assets/spritesheet.png'); // stupid little seal
-  deathSound = loadSound('/../../essentials/assets/death.mp3'); // death sound
-  dangerSound = loadSound('/../../essentials/assets/danger.mp3'); // danger sound
-  pattern = loadImage('/../../essentials/Assets/ppattern.png') // pattern for menu
+  spritesheet = loadImage('/../Assets/spritesheet.png'); // stupid little seal
+  deathSound = loadSound('/../Assets/death.mp3'); // death sound
+  dangerSound = loadSound('/../Assets/danger.mp3'); // danger sound
+  pattern = loadImage('/../Assets/ppattern.png') // pattern for menu
 }
 
 function setup() {
