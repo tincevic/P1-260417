@@ -94,11 +94,11 @@ function draw() {
   textFont("Bahnschrift");
   // tekening 2: vlag (Joegoslavië)
   noStroke();
-  fill(0,56,147);
+  fill(255,130,0);
   rect(25,25,300,100);
   fill(255);
   rect(25,125,300,100);
-  fill(221,0,0);
+  fill(0,154,68);
   rect(25,225,300,100);
   fill(221,0,0);
   stroke(245,191,34);
